@@ -10,6 +10,7 @@ Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 PM2008_I2C pm2008_i2c;
 DHT dht(DHTPIN, DHTTYPE);
 
+
 void setup() {
    pm2008_i2c.begin();
   Serial.begin(9600);
