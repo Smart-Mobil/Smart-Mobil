@@ -25,8 +25,9 @@ void setup() {
 
 void loop() {
   //비접촉식온도센서
-  Serial.print("비접촉식온도센서 외부 온도 = "); Serial.print(mlx.readAmbientTempC()); 
-  Serial.print("* C\t비접촉식온도센서 접촉대상 온도 = "); Serial.print(mlx.readObjectTempC()); Serial.println("*C");
+   Serial.println("비접촉식온도 센서");
+  Serial.print("외부 온도 = "); Serial.print(mlx.readAmbientTempC()); Serial.println("*C");
+  Serial.print("접촉대상 온도 = "); Serial.print(mlx.readObjectTempC()); Serial.println("*C");
   //Serial.print("Ambient = "); Serial.print(mlx.readAmbientTempF()); 
   //Serial.print("*F\tObject = "); Serial.print(mlx.readObjectTempF()); Serial.println("*F");
 
@@ -36,6 +37,7 @@ void loop() {
   //미세먼지
   uint8_t ret = pm2008_i2c.read();
 
+   Serial.println("미세먼지 센서");
   if (ret == 0) {
     Serial.print("PM 1.0 (GRIMM) : ");
     Serial.println(pm2008_i2c.pm1p0_grimm);
