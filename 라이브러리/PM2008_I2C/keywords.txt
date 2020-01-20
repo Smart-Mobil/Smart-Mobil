@@ -1,0 +1,10 @@
+# Syntax Coloring for PM2008_I2C Library
+# Datatypes (KEYWORD1)
+PM2008_I2C	KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+begin	KEYWORD2
+command	KEYWORD2
+read	KEYWORD2
+
+# Constants (LITERAL1)
