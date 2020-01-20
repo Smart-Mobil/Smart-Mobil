@@ -1,17 +1,14 @@
 #include <Wire.h>
-#include <Time.h>  
-#include <DS1307RTC.h> 
 #include <Adafruit_MLX90614.h>
 #include <pm2008_i2c.h>
 #include "DHT.h"
- 
+
 #define DHTPIN 2        // SDA 핀의 설정
 #define DHTTYPE DHT22   // DHT22 (AM2302) 센서종류 설정
  
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 PM2008_I2C pm2008_i2c;
 DHT dht(DHTPIN, DHTTYPE);
-swRTC rtc; //swRTC 객체 선언
 
 void setup() {
   pm2008_i2c.begin();
