@@ -45,10 +45,11 @@ void loop() {
   //미세먼지
   uint8_t ret = pm2008_i2c.read();
   if (ret == 0) {
-    Serial.print("1.");
+    Serial.print("1)");
     Serial.print(pm2008_i2c.pm10_tsi);
     Serial.print(",");
     Serial.print(pm2008_i2c.pm2p5_tsi);
+    Serial.print("/");
   }
   
   setColor(255, 0, 0); // red
@@ -62,12 +63,13 @@ void loop() {
   if (isnan(t) || isnan(h)) {
   //값 읽기 실패시
   } else {
-    Serial.print("2.");
+    Serial.print("2)");
     Serial.print(t);
     Serial.print("*C");
     Serial.print(",");
     Serial.print(h);
     Serial.print("%");
+    Serial.print("/");
   }
   
   setColor(0, 255, 0); // green
@@ -75,9 +77,10 @@ void loop() {
   Serial.println();
   
   //비접촉식온도센서
-  Serial.print("3."); 
+  Serial.print("3)"); 
   Serial.print(mlx.readObjectTempC()); 
   Serial.print("*C"); 
+  Serial.print("/");
 
   setColor(0, 0, 255); // blue
   setColor(255, 0, 255); // blue
