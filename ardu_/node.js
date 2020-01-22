@@ -14,10 +14,13 @@ app.listen(3000, () => {
   console.log("Server has been started")
 })
  
-var value;
+var val;
 
 serialPort.open(function () {
-    
+    serialPort.on('data',function(data){
+    val += data + '@#';  
+
+});
 
 
 // 최상위 라우트로 접속 시 /hello로 리다이렉트 
@@ -25,11 +28,12 @@ app.get("/", (req, res) => {
   res.redirect('/hello')
 })
  
-serialPort.on('data',function(data){
+    serialPort.on('data',function(data){
 // Pug 파일 렌더링
 app.get("/hello", (req, res) => {
-    console.log(data);
-    res.render('hello', { title: 'Hello', message: data})
+    console.log(val+ d);
+    var d = new Date();
+    res.render('hello', { title: 'Hello', message: val+d})
 })
 })
 
