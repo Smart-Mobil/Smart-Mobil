@@ -7,7 +7,10 @@ var app = express()
 var SerialPort = require("serialport");
 var port =3000;
 var serialPort =new SerialPort("/dev/ttyACM0",{baudRate : 9600});
-var bodyParser = require('body-parser'); // 바디 파싱
+
+var bodyParser = require('body-parser'); // 바디 파서
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
 //
 app.locals.pretty = true
 app.set('views', './view_file')
@@ -25,13 +28,13 @@ serialPort.open(function () {
     if(val.length >= 1000000000 ){
       val = val.substring(1,1);  
     }
-});
+  });
 
 
 // 최상위 라우트로 접속 시 /hello로 리다이렉트 
 app.get("/", (req, res) => {
   res.redirect('/hello')
-})
+  })
  
 app.get("/bye", (req, res) => { //바이
   fs.readFile('bye.html', (error, data) => {
@@ -47,22 +50,14 @@ app.get("/bye", (req, res) => { //바이
 })
 
 
- 
-app.post("/data", (req, res) => {
-  var recvData = req.body.data
-  serialPort.wirte(recvData,function(data){
-    if(error) {
-
-			return console.log("Error on write : ", error.message);
-
-		} else {
-
-			console.log("메세지가 정상적으로 입력되었습니다.");
-
-    }
-
-  });
-})
+var recvData
+app.post("/data", function(req, res){
+  recvData = req.body.data
+  console.log(recvData);
+  
+  serialPort.write(recvData, function(err, results) {});
+  res.render('finish');
+});
 
 
 
