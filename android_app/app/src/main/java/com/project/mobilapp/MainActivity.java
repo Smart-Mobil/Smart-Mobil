@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private Document doc;
 
     private TextView textView;
+    private Button button;
+
     private String dustString = "", dustString1 = "", dustString2 = "";
     private String THString = "", tempString = "", humString = "";
     private String bodyTempString = "";
@@ -39,7 +43,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = (TextView) findViewById(R.id.textView);
+        button = (Button) findViewById(R.id.button);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_ = new Intent(getApplicationContext(), VideoActivity.class);
+                startActivity(intent_);
+            }
+        });
 
 
         class NewRunnable implements Runnable {
@@ -73,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                doc = Jsoup.connect("http://172.30.1.24:3000/hello")
+                doc = Jsoup.connect("http://210.99.254.221:3000/hello")
                         .get();
 
                 // System.out.println(doc);
 
-                Element ele1, ele2, ele3, ele4;
+                Element ele1, ele2, ele3;
 
 
                 ele1 = doc.select("h1").first();
