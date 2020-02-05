@@ -54,8 +54,12 @@ var recvData
 app.post("/data", function(req, res){
   recvData = req.body.data
   console.log(recvData);
-  
-  serialPort.write(recvData, function(err, results) {});
+  if( recvData <= '6'){
+    mainFunction(recvData);
+  }
+  else if( recvData <= 'g'){
+    //다른함수 ~ 이런식으로 구현할 예정입니다.
+}
   res.render('finish');
 });
 
@@ -94,3 +98,30 @@ app.get("/hello", (req, res) => {
 })
 
 });
+
+// 주요 기능들에 따른 함수를 호출할 예정입니다. 
+function mainFunction( argument1 ) {
+  // Do Something
+  if( 1 === '1'){ //스피커 ON
+    /* a~g까지 알파벳들을 입력받아서  */
+
+  }
+  else if (2 === '2'){ // 스피커 OFF
+
+  }
+  else if (3 === '3'){ // LED ON
+
+  }
+  else if (4 === '4'){ // LED OFF
+
+  }
+  else if (5 === '5'){ // 서보모터 ON
+    /*
+
+     */
+  }
+  else if (6 === '6'){ // 서보모터 oFF
+
+  }
+
+}
