@@ -30,34 +30,27 @@ public class MainActivity extends AppCompatActivity {
     private Document doc;
 
     private TextView textView;
-    private Button button;
+    private Button VideoButton;
+    private Button LedNmoterButton;
 
     private String dustString = "", dustString1 = "", dustString2 = "";
     private String THString = "", tempString = "", humString = "";
     private String bodyTempString = "";
     private String allString = "";
-
+private boolean bool = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         textView = (TextView) findViewById(R.id.textView);
-        button = (Button) findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_ = new Intent(getApplicationContext(), VideoActivity.class);
-                startActivity(intent_);
-            }
-        });
-
+        VideoButton = (Button) findViewById(R.id.button);
+        LedNmoterButton = (Button) findViewById(R.id.button2);
 
         class NewRunnable implements Runnable {
             @Override
             public void run() {
-                while (true) {
+                while (bool) {
                     allString="";
                     //파싱 시작
                     jsoupAsyncTask1 = new JsoupAsyncTask1();
@@ -70,6 +63,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        VideoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_ = new Intent(getApplicationContext(), VideoActivity.class);
+                startActivity(intent_);
+                jsoupAsyncTask1.cancel(true);
+                bool=false;
+            }
+        });
+
+        LedNmoterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_ = new Intent(getApplicationContext(), Input.class);
+                startActivity(intent_);
+                jsoupAsyncTask1.cancel(true);
+                bool=false;
+            }
+        });
 
         NewRunnable nr = new NewRunnable() ;
         Thread t = new Thread(nr) ;
@@ -85,13 +98,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                doc = Jsoup.connect("http://210.99.254.221:3000/hello")
-                        .get();
+                doc = Jsoup.connect("http://172.30.1.8:3000/hello").get();
 
-                // System.out.println(doc);
+                System.out.println(doc);
 
                 Element ele1, ele2, ele3;
-
 
                 ele1 = doc.select("h1").first();
                 ele2 = doc.select("p").first();
@@ -100,31 +111,46 @@ public class MainActivity extends AppCompatActivity {
                 //미세먼지
                 dustString = ele1.text();
 
-                dustString = dustString.substring(dustString.lastIndexOf(")") + 1);
+                if(dustString.length()>0) {
+                    dustString = dustString.substring(dustString.lastIndexOf(")") + 1);
 
-                int idx = dustString.indexOf(",");
-                dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
-                dustString2 = "PM2.5 : " + dustString.substring(idx + 1, dustString.indexOf("/")) + "\n\n";
+                    int idx = dustString.indexOf(",");
+                    if(0<idx) {
+                        dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
+                        if(idx + 1<dustString.indexOf("/")) {
+                            dustString2 = "PM2.5 : " + dustString.substring(idx + 1, dustString.indexOf("/")) + "\n\n";
+                        }
+                    }
 
+                }
 
                 //온습도
                 THString = ele2.text();
 
-                THString = THString.substring(THString.lastIndexOf(")") + 1);
+                if(THString.length()>0) {
+                    THString = THString.substring(THString.lastIndexOf(")") + 1);
 
-                int idx2 = THString.indexOf(",");
-                tempString = "<온습도>\n온도 : " + THString.substring(0, idx2) + "\n";
-                humString = "습도 : " + THString.substring(idx2 + 1, THString.indexOf("/")) + "\n\n";
+                    int idx2 = THString.indexOf(",");
+                    if(0<idx2) {
+                        tempString = "<온습도>\n온도 : " + THString.substring(0, idx2) + "\n";
+                        if(idx2 + 1<THString.indexOf("/")) {
+                            humString = "습도 : " + THString.substring(idx2 + 1, THString.indexOf("/")) + "\n\n";
+                        }
+                    }
+                }
 
                 //체온
                 bodyTempString = ele3.text();
 
-                bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
+                if(bodyTempString.length()>0) {
+                    bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
+                    if(0<bodyTempString.indexOf("/")) {
+                        bodyTempString = "체온 : " + bodyTempString.substring(0, bodyTempString.indexOf("/")) + "\n\n";
+                    }
+                }
 
-                bodyTempString = "체온 : " + bodyTempString.substring(0, bodyTempString.indexOf("/")) + "\n\n";
+                allString = dustString1 + dustString2 + tempString + humString + bodyTempString;
 
-
-                allString += dustString1 + dustString2 + tempString + humString + bodyTempString;
             } catch (IOException e) {
                 e.printStackTrace();
             }
