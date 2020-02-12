@@ -1,7 +1,6 @@
 package com.project.mobilapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,8 +15,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
-
-public class MainActivity extends AppCompatActivity {
+public class Menu1Fragment extends AppCompatActivity {
     private Document doc;
 
     private TextView textView;
@@ -28,11 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private String THString = "", tempString = "", humString = "";
     private String bodyTempString = "";
     private String allString = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu1_fragment);
 
         textView = (TextView) findViewById(R.id.textView);
         VideoButton = (Button) findViewById(R.id.button);

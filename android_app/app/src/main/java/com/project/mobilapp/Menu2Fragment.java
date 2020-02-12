@@ -10,15 +10,13 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-
-public class Input extends AppCompatActivity {
+public class Menu2Fragment extends AppCompatActivity {
     private JsoupAsyncTask2 jsoupAsyncTask2;
     private TextView text;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input);
+        setContentView(R.layout.activity_menu2_fragment);
 
         text=(TextView)findViewById(R.id.textView2);
         jsoupAsyncTask2 = new JsoupAsyncTask2();

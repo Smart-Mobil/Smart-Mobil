@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Input"></activity>
+        <activity android:name=".Menu3Fragment"></activity>
+        <activity android:name=".Menu2Fragment" />
+        <activity android:name=".Menu1Fragment" />
+        <activity android:name=".Input" />
         <activity android:name=".VideoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
