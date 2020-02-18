@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Connection;
@@ -17,7 +18,10 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 public class OperateFragment extends Fragment {
     private JsoupAsyncTask2 jsoupAsyncTask2;
-    private TextView text;
+    private Button lightbutton;
+    private Button musicbutton;
+    private Button motorbutton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,10 @@ public class OperateFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_operate, container, false);
 
-        text=(TextView)v.findViewById(R.id.textView2);
+        lightbutton=(Button)v.findViewById(R.id.lightbutton);
+        musicbutton=(Button)v.findViewById(R.id.musicbutton);
+        motorbutton=(Button)v.findViewById(R.id.motorbutton);
+
         jsoupAsyncTask2 = new JsoupAsyncTask2();
         jsoupAsyncTask2.execute();
 

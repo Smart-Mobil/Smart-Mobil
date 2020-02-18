@@ -6,11 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".OperateFragment">
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/lightbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="menu2"
+        android:layout_marginTop="168dp"
+        android:text="무드등"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/musicbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="음악"
+        app:layout_constraintStart_toStartOf="@+id/lightbutton"
+        app:layout_constraintTop_toBottomOf="@+id/lightbutton" />
+
+    <Button
+        android:id="@+id/motorbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="모빌동작"
+        app:layout_constraintStart_toStartOf="@+id/musicbutton"
+        app:layout_constraintTop_toBottomOf="@+id/musicbutton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

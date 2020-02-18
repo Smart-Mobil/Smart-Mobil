@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".MotorActivity"></activity>
+        <activity android:name=".MusicActivity" />
+        <activity android:name=".LightActivity" />
+        <activity android:name=".SettingActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".VideoFragment" />
         <activity android:name=".OperateFragment" />

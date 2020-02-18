@@ -10,7 +10,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -23,8 +22,6 @@ public class EnvFragment extends Fragment {
     private Document doc;
 
     private TextView textView;
-    private Button VideoButton;
-    private Button LedNmoterButton;
 
     private String dustString = "", dustString1 = "", dustString2 = "";
     private String THString = "", tempString = "", humString = "";
@@ -38,7 +35,7 @@ public class EnvFragment extends Fragment {
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_Env, container, false);
+        View v = inflater.inflate(R.layout.fragment_env, container, false);
 
         textView = (TextView) v.findViewById(R.id.textView);
 
