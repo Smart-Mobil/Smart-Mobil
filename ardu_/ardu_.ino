@@ -27,6 +27,10 @@ String percent="%";
 String allString="";
 
 void setup() {
+  pinMode(redPin, OUTPUT);
+ pinMode(greenPin, OUTPUT);
+ pinMode(bluePin, OUTPUT); 
+ 
   pm2008_i2c.begin();
   pm2008_i2c.command();
   
@@ -55,7 +59,10 @@ void loop() {
     Serial.write(Serial.read());
   }
  */
-  
+ //RGB LED 5V에 꽂아라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+ // setColor(255, 0, 0); // red
+
   //미세먼지
   uint8_t ret = pm2008_i2c.read();
   if (ret == 0) {

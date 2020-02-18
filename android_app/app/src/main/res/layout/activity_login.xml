@@ -21,29 +21,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main_area"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="190dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="132dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_logo" />
+            app:layout_constraintRight_toRightOf="parent">
 
             <EditText
                 android:id="@+id/editText_passwd"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/passwd_icon"
                 android:drawablePadding="15dp"
                 android:ems="10"
                 android:inputType="textPassword"
@@ -57,7 +44,6 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/login_icon"
                 android:drawablePadding="15dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -69,13 +55,12 @@
 
             <Button
                 android:id="@+id/button_login"
-                android:layout_width="133dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_button_go"
+                android:layout_width="0dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="12dp"
+                android:text="로그인"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
@@ -95,11 +80,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
-                android:text="깨사모 아이디와 비밀번호를 입력해주세요"
+                android:layout_marginBottom="184dp"
+                android:text="아이디와 비밀번호를 입력해주세요"
+                app:layout_constraintBottom_toTopOf="@+id/button_register"
                 app:layout_constraintEnd_toEndOf="@+id/editText_id"
                 app:layout_constraintHorizontal_bias="0.448"
                 app:layout_constraintStart_toStartOf="@+id/editText_id"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="0dp"
+                android:layout_height="51dp"
+                android:layout_marginEnd="80dp"
+                android:text="가입"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
