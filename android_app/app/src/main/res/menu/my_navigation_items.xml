@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/bn1"
+        app:showAsAction="ifRoom"
+        android:title="온습도" />
+    <item android:id="@+id/bn2"
+        app:showAsAction="ifRoom"
+        android:title="환경제어" />
+    <item android:id="@+id/bn3"
+        app:showAsAction="ifRoom"
+        android:title="동영상"/>
+</menu>

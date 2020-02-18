@@ -1,24 +1,32 @@
 package com.project.mobilapp;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import android.media.session.MediaController;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.VideoView;
 
-public class Menu3Fragment extends AppCompatActivity {
+public class VideoFragment extends Fragment {
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu3_fragment);
+    }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_video, container, false);
 
         // 웹뷰 시작
-        mWebView = (WebView) findViewById(R.id.webView);
+        mWebView = (WebView) v.findViewById(R.id.webView);
 
         mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
         mWebSettings = mWebView.getSettings(); //세부 세팅 등록
@@ -34,5 +42,7 @@ public class Menu3Fragment extends AppCompatActivity {
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
         mWebView.loadUrl("http://210.99.254.221:8080/stream"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+
+        return v;
     }
 }

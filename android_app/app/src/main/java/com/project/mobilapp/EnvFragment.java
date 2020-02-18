@@ -1,11 +1,15 @@
 package com.project.mobilapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,7 +19,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
-public class Menu1Fragment extends AppCompatActivity {
+public class EnvFragment extends Fragment {
     private Document doc;
 
     private TextView textView;
@@ -26,30 +30,17 @@ public class Menu1Fragment extends AppCompatActivity {
     private String THString = "", tempString = "", humString = "";
     private String bodyTempString = "";
     private String allString = "";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu1_fragment);
+    }
 
-        textView = (TextView) findViewById(R.id.textView);
-        VideoButton = (Button) findViewById(R.id.button);
-        LedNmoterButton = (Button) findViewById(R.id.button2);
+    @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_Env, container, false);
 
-        VideoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_ = new Intent(getApplicationContext(), VideoActivity.class);
-                startActivity(intent_);
-            }
-        });
-
-        LedNmoterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_ = new Intent(getApplicationContext(), Input.class);
-                startActivity(intent_);
-            }
-        });
+        textView = (TextView) v.findViewById(R.id.textView);
 
         new Thread() {
             public void run() {
@@ -59,15 +50,16 @@ public class Menu1Fragment extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    getTime();
+                    getInfo();
                     Message msg = handler.obtainMessage();
                     handler.sendMessage(msg);
                 }
             }
         }.start();
+        return v;
     }
 
-    private void getTime() {
+    private void getInfo() {
         allString = "";
 
         try {
