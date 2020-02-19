@@ -20,12 +20,9 @@ import java.io.IOException;
 
 public class EnvFragment extends Fragment {
     private Document doc;
-
     private TextView textView;
 
-    private String dustString = "", dustString1 = "", dustString2 = "";
-    private String THString = "", tempString = "", humString = "";
-    private String bodyTempString = "";
+    private String dust = "", temphum = "", tempbody = "";
     private String allString = "";
 
     @Override
@@ -56,6 +53,66 @@ public class EnvFragment extends Fragment {
         return v;
     }
 
+    private String getDust(String dustString) {
+        //미세먼지
+        String dustString1 = "", dustString2 = ""; //substr용 임시 변수
+
+        if (dustString.length() > 0) {
+            dustString = dustString.substring(dustString.lastIndexOf(")") + 1);
+
+            int idx = dustString.indexOf(",");
+
+            if (0 < idx || idx + 1 < dustString.indexOf("/")) {
+                dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
+                dustString2 = "PM2.5 : " + dustString.substring(idx + 1, dustString.indexOf("/")) + "\n\n";
+
+                return dustString1 + dustString2;
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    private String getTempHum(String THString) {
+        //온습도
+        String tempString = "", humString = ""; //substr용 임시 변수
+
+        if (THString.length() > 0) {
+            THString = THString.substring(THString.lastIndexOf(")") + 1);
+
+            int idx2 = THString.indexOf(",");
+
+            if (0 < idx2 || idx2 + 1 < THString.indexOf("/")) {
+                tempString = "<온습도>\n온도 : " + THString.substring(0, idx2) + "\n";
+                humString = "습도 : " + THString.substring(idx2 + 1, THString.indexOf("/")) + "\n\n";
+
+                return tempString + humString;
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    private String getTempBody(String bodyTempString) {
+        //체온
+        if (bodyTempString.length() > 0) {
+            bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
+            if (0 < bodyTempString.indexOf("/")) {
+                bodyTempString = "체온 : " + bodyTempString.substring(0, bodyTempString.indexOf("/")) + "\n\n";
+
+                return bodyTempString;
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
     private void getInfo() {
         allString = "";
 
@@ -70,48 +127,12 @@ public class EnvFragment extends Fragment {
             ele2 = doc.select("p").first();
             ele3 = doc.select("h2").first();
 
-            //미세먼지
-            dustString = ele1.text();
+            dust = getDust(ele1.text());
+            temphum = getTempHum(ele2.text());
+            tempbody = getTempBody(ele3.text());
 
-            if (dustString.length() > 0) {
-                dustString = dustString.substring(dustString.lastIndexOf(")") + 1);
+            allString = dust + temphum + tempbody;
 
-                int idx = dustString.indexOf(",");
-                if (0 < idx) {
-                    dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
-                    if (idx + 1 < dustString.indexOf("/")) {
-                        dustString2 = "PM2.5 : " + dustString.substring(idx + 1, dustString.indexOf("/")) + "\n\n";
-                    }
-                }
-
-            }
-
-            //온습도
-            THString = ele2.text();
-
-            if (THString.length() > 0) {
-                THString = THString.substring(THString.lastIndexOf(")") + 1);
-
-                int idx2 = THString.indexOf(",");
-                if (0 < idx2) {
-                    tempString = "<온습도>\n온도 : " + THString.substring(0, idx2) + "\n";
-                    if (idx2 + 1 < THString.indexOf("/")) {
-                        humString = "습도 : " + THString.substring(idx2 + 1, THString.indexOf("/")) + "\n\n";
-                    }
-                }
-            }
-
-            //체온
-            bodyTempString = ele3.text();
-
-            if (bodyTempString.length() > 0) {
-                bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
-                if (0 < bodyTempString.indexOf("/")) {
-                    bodyTempString = "체온 : " + bodyTempString.substring(0, bodyTempString.indexOf("/")) + "\n\n";
-                }
-            }
-
-            allString = dustString1 + dustString2 + tempString + humString + bodyTempString;
         } catch (IOException e) {
             e.printStackTrace();
         }
