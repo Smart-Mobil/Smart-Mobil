@@ -15,6 +15,20 @@ app.set('views', './view_file')
 app.set('view engine', 'pug')
 app.use(bodyParser.json()) // 바디 파싱
 
+// led
+var Gpio = require('pigpio').Gpio, //include pigpio to interact with the GPIO
+ledRed = new Gpio(26, {mode: Gpio.OUTPUT}), //use GPIO pin 4 as output for RED
+ledGreen = new Gpio(19, {mode: Gpio.OUTPUT}), //use GPIO pin 17 as output for GREEN
+ledBlue = new Gpio(23, {mode: Gpio.OUTPUT}), //use GPIO pin 27 as output for BLUE
+redRGB = 255, //set starting value of RED variable to off (255 for common anode)
+greenRGB = 255, //set starting value of GREEN variable to off (255 for common anode)
+blueRGB = 255; //set starting value of BLUE variable to off (255 for common anode)
+//RESET RGB LED
+ledRed.digitalWrite(1); // Turn RED LED off
+ledGreen.digitalWrite(1); // Turn GREEN LED off
+ledBlue.digitalWrite(1); // Turn BLUE LED off
+
+
 
 app.listen(3000, () => {  //node.js 서버 실행
   console.log("Server has been started")
@@ -61,8 +75,7 @@ app.post("/data", function(req, res){
 
 
 
-
-
+serialPort.on('data',function(data){ //시리얼데이터 송신
 // Pug 파일 렌더링
 app.get("/hello", (req, res) => {
   var h1;
@@ -91,7 +104,8 @@ app.get("/hello", (req, res) => {
     var d = new Date();
     res.render('hello', { title: 'Hello',message1: h1, message2: h2, message3 : h3, message4: d  })
 })
-});
+})
+
 
 
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
@@ -101,11 +115,27 @@ function mainFunction( argument1 ) {
     /* a~g까지 알파벳들을 입력받아서  */
     console.log("mainfunc");
 
-
+    
+    ledRed.pwmWrite(redRGB-255); //set RED LED to specified value
+    ledGreen.pwmWrite(greenRGB-255); //set GREEN LED to specified value
+    ledBlue.pwmWrite(blueRGB-255); //set BLUE LED to specified value
 
     return 1;
 
   }
- 
+  if( argument1 === 'off'){ //스피커 ON
+    /* a~g까지 알파벳들을 입력받아서  */
+    console.log("mainfunc");
+
+    
+    ledRed.digitalWrite(1); // Turn RED LED off
+    ledGreen.digitalWrite(1); // Turn GREEN LED off
+    ledBlue.digitalWrite(1); // Turn BLUE LED off
+
+    return 1;
+
+  }
 
 }
+
+});
