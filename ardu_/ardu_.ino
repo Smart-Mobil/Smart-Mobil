@@ -46,6 +46,48 @@ void setColor(int red, int green, int blue)
   analogWrite(bluePin, blue); 
 }
 
+String CheckTempHumidity(){
+  //온습도
+  float t = dht.readTemperature();
+  float h = dht.readHumidity();
+  String _temphum;
+
+  if (isnan(t) || isnan(h)) 
+  {
+  //값 읽기 실패시
+  return "";
+  } 
+  else {
+    _temphum=second+String(t)+temp+comma+String(h)+percent+slash;
+    
+   return _temphum;
+  }
+}
+
+String CheckDust(){
+  //미세먼지
+  uint8_t ret = pm2008_i2c.read();
+
+  String _dust;
+  
+  if (ret == 0) {
+    _dust=first+String(pm2008_i2c.pm10_tsi)+comma+String(pm2008_i2c.pm2p5_tsi)+slash;
+    
+    return _dust;
+  }
+  else{
+    return "";
+  }
+}
+
+String CheckBodyTemp(){
+  String _bodytemp;
+  //비접촉식온도센서
+  _bodytemp=third+String(mlx.readObjectTempC())+temp+slash;
+  
+  return _bodytemp;
+}
+
 void loop() {
    delay(1000);
    /* 
@@ -60,28 +102,10 @@ void loop() {
   }
  */
  //RGB LED 5V에 꽂아라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- 
  // setColor(255, 0, 0); // red
 
-  //미세먼지
-  uint8_t ret = pm2008_i2c.read();
-  if (ret == 0) {
-    allString=first+String(pm2008_i2c.pm10_tsi)+comma+String(pm2008_i2c.pm2p5_tsi)+slash;
-  }
+  allString=CheckDust()
+  allString+=CheckTempHumidity()+CheckBodyTemp();
   
-  //온습도
-  float t = dht.readTemperature();
-  float h = dht.readHumidity();
-  if (isnan(t) || isnan(h)) 
-  {
-  //값 읽기 실패시
-  } 
-  else {
-   allString+=second+String(t)+temp+comma+String(h)+percent+slash;
-  }
-  
-  //비접촉식온도센서
-  allString+=third+String(mlx.readObjectTempC())+temp+slash;
-
   Serial.print(allString);
 }
