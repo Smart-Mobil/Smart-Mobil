@@ -14,9 +14,12 @@ app.locals.pretty = true
 app.set('views', './view_file')
 app.set('view engine', 'pug')
 app.use(bodyParser.json()) // 바디 파싱
+
+
 app.listen(3000, () => {  //node.js 서버 실행
   console.log("Server has been started")
 })
+
 
 var val; // 임시로 센서값을 저장할 변수 
  
@@ -51,19 +54,15 @@ var recvData //body 에서 data를 받아옵니다.
 app.post("/data", function(req, res){
   recvData = req.body.data // input태그(name = data) 값을 받아옵니다. 
   console.log(recvData);
-  if( recvData <= '6'){
-    mainFunction(recvData);
-  }
-  else if( recvData <= 'g'){
-    //다른함수 ~ 이런식으로 구현할 예정입니다.
-}
+  mainFunction(recvData);
+  
   res.render('finish');
 });
 
 
 
 
-serialPort.on('data',function(data){
+
 // Pug 파일 렌더링
 app.get("/hello", (req, res) => {
   var h1;
@@ -92,33 +91,21 @@ app.get("/hello", (req, res) => {
     var d = new Date();
     res.render('hello', { title: 'Hello',message1: h1, message2: h2, message3 : h3, message4: d  })
 })
-})
-
 });
+
 
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
 function mainFunction( argument1 ) {
   // Do Something
-  if( 1 === '1'){ //스피커 ON
+  if( argument1 === 'on'){ //스피커 ON
     /* a~g까지 알파벳들을 입력받아서  */
+    console.log("mainfunc");
+
+
+
+    return 1;
 
   }
-  else if (2 === '2'){ // 스피커 OFF
-
-  }
-  else if (3 === '3'){ // LED ON
-
-  }
-  else if (4 === '4'){ // LED OFF
-
-  }
-  else if (5 === '5'){ // 서보모터 ON
-    /*
-
-     */
-  }
-  else if (6 === '6'){ // 서보모터 oFF
-
-  }
+ 
 
 }
