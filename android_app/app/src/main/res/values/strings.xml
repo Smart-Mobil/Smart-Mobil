@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Mobil App</string>
+    <string name="app_name">MyMobil</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_env">환경정보</string>
+    <string name="menu_operate">무드등/음악/모빌 제어</string>
+    <string name="menu_streaming">동영상</string>
+    <string name="menu_info">육아정보</string>
 </resources>
