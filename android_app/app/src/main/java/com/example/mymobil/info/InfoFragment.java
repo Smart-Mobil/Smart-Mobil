@@ -16,21 +16,11 @@ import com.example.mymobil.R;
 
 public class InfoFragment extends Fragment {
 
-    private InfoViewModel infoViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        infoViewModel =
-                ViewModelProviders.of(this).get(InfoViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_info, container, false);
         final TextView textView = root.findViewById(R.id.text_info);
-
-        infoViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
 
         return root;
     }
