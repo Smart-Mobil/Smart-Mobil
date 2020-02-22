@@ -35,15 +35,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_logo" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editText_passwd"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/passwd_icon"
                 android:drawablePadding="15dp"
                 android:ems="10"
                 android:inputType="textPassword"
@@ -57,7 +55,6 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/login_icon"
                 android:drawablePadding="15dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -72,7 +69,6 @@
                 android:layout_width="133dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_button_go"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.507"
@@ -95,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
-                android:text="깨사모 아이디와 비밀번호를 입력해주세요"
+                android:text="아이디와 비밀번호를 입력해주세요"
                 app:layout_constraintEnd_toEndOf="@+id/editText_id"
                 app:layout_constraintHorizontal_bias="0.448"
                 app:layout_constraintStart_toStartOf="@+id/editText_id"
