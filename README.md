@@ -68,9 +68,7 @@ Child care information
 ----------------------------------------------------------
 #### Application
 * adobe tool (https://xd.adobe.com/view/4d7cd635-81fe-4a37-79d2-4c57d108293a-3b4d/)
-<img src="https://user-images.githubusercontent.com/52243808/76209245-c162d780-6244-11ea-88e2-d418d5158d43.png" width="50%">
-<img src="https://user-images.githubusercontent.com/52243808/76209248-c2940480-6244-11ea-9ad2-fa61421a6d91.png" width="50%">
-<img src="https://user-images.githubusercontent.com/52243808/76209281-d2abe400-6244-11ea-864c-320cf1c46be6.png" width="50%">
+<img src="https://user-images.githubusercontent.com/52243808/76209245-c162d780-6244-11ea-88e2-d418d5158d43.png" width="50%"><img src="https://user-images.githubusercontent.com/52243808/76209248-c2940480-6244-11ea-9ad2-fa61421a6d91.png" width="50%"><img src="https://user-images.githubusercontent.com/52243808/76209281-d2abe400-6244-11ea-864c-320cf1c46be6.png" width="50%">
 
 #### Arduino & RasberryPi
 * Arduino
