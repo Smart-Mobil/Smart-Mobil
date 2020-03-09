@@ -73,7 +73,7 @@ Child care information
 
 ### :pencil2:7. 참고
 ----------------------------------------------------------
-####사이트
+#### 사이트
 * 전반적인 웹구축 : http://www.hardcopyworld.com/ngine/aduino/index.php/archives/3343 
 * 모듈에러 참고자료 : https://github.com/serialport/node-serialport/issues/1910
 * node 버젼 변경시 참고자료 : https://futurecreator.github.io/2018/05/28/nodejs-npm-update-latest-or-stable-version/
@@ -88,7 +88,7 @@ https://www.w3schools.com/nodejs/nodejs_raspberrypi_rgb_led_websocket.asp
 * 라즈베리파이를 이용한 음악 스트리밍 : https://writingdeveloper.tistory.com/8
 Noje.js 스트리밍 : https://javafa.gitbooks.io/nodejs_server_basic/content/chapter11.html
 
-#### 신생아 관련 논문
+#### 관련 논문
 * [이군자,이명희(2002), 신생아 감각자극에 관한 국내 연구 논문 분석, 아동간호학회지, 8(3), 332p]
 * [안영미, 손 민, 김남희, 강나래, 강승연, 정은미(2017), 고위험신생아의 저체온증 현황 및 관련요인, 아동간호학회지, 23(4), 505p]
 
