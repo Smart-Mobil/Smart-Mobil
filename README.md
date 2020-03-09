@@ -2,13 +2,13 @@
 Korea Polytechnic University  
 Computer Engineering Senier Project  
 
-### :book:0. 프로젝트명 
+### :book: 프로젝트명 
 #### 원격 제어가 가능한 신생아 건강 스마트 모빌  
 Remotely Controllable Smart Mobil for newborn baby  
 Korea Polytechnic University  
 Professor 공기석 Student 김진엽 박현욱 신용원  
 
-### :pencil2:1. 개요  
+### :pencil2: 개요  
 ----------------------------------------------------------
 주변 환경에 민감한 신생아의 건강  
 Health of newborns sensitive to the surrounding environment  
@@ -21,14 +21,14 @@ Streaming with Mobile
 애플리케이션과 웹을 이용한 육아 데이터 및 통계치 제공  
 Providing parenting data and statistics using applications and the web  
 
-### :pencil2:2. 목적
+### :pencil2: 목적
 ----------------------------------------------------------
 모빌에 부착된 다양한 모듈을 통해 환경 데이터 수집 및 영상 스트리밍  
 Collect environmental data and stream video through various modules attached to mobiles  
 애플리케이션과 웹을 통해 다양한 환경 데이터 전달, 모빌 원격 제어  
 Various environmental data delivery through mobile and application, mobile remote control  
 
-## :pencil2:3. 기능 
+### :pencil2: 기능 
 ----------------------------------------------------------
 신생아 모니터링  
 Newborn monitoring  
@@ -46,13 +46,13 @@ Child care information
 (To be developed further)  
 
 
-### :pencil2:4. 역할
+### :pencil2: 역할
 ----------------------------------------------------------
 * 김진엽 : 온습도/미세먼지/비접촉식 모듈, 앱 제작/데이터베이스 구축  
 * 신용원 : UV4L/LED/서보모터/애플리케이션 프론트앤드/프레임제작  
 * 박현욱 : nodeJS 웹서버/웹 프론트앤드/SoC보드 통신/보드-애플리케이션 통신  
 
-### 5. 개발환경
+### :pencil2: 개발환경
 ----------------------------------------------------------
 * SoC Board : Arduino Uno / Raspberry Pi 4 B+  
 * Device : Galaxy S8  
@@ -62,7 +62,7 @@ Child care information
 * Server : nodeJS  
 * Streaming Server : UV4L  
 
-### :pencil2:6. 시연
+### :pencil2: 시연
 ----------------------------------------------------------
 #### Application
 * adobe tool (https://xd.adobe.com/view/4d7cd635-81fe-4a37-79d2-4c57d108293a-3b4d/)
