@@ -59,7 +59,7 @@ Streaming Server : UV4L
 
 # 6. 제작과정 시연/참고 자료
 앱 프론트앤드(Adobe XD/200219) : https://xd.adobe.com/view/4d7cd635-81fe-4a37-79d2-4c57d108293a-3b4d/  
-개발 사진(Currently in development)  
+개발 예시 사진(Login/Env/Nav/...etc. : Currently in development)  
 <img src="https://user-images.githubusercontent.com/52243808/76209245-c162d780-6244-11ea-88e2-d418d5158d43.png"></img>  
 <img src="https://user-images.githubusercontent.com/52243808/76209248-c2940480-6244-11ea-9ad2-fa61421a6d91.png"></img>  
 <img src="https://user-images.githubusercontent.com/52243808/76209281-d2abe400-6244-11ea-864c-320cf1c46be6.png"></img>  
