@@ -70,11 +70,10 @@ Child care information
 * adobe tool (https://xd.adobe.com/view/4d7cd635-81fe-4a37-79d2-4c57d108293a-3b4d/)
 <img src="https://user-images.githubusercontent.com/52243808/76209245-c162d780-6244-11ea-88e2-d418d5158d43.png" width="50%"><img src="https://user-images.githubusercontent.com/52243808/76209248-c2940480-6244-11ea-9ad2-fa61421a6d91.png" width="50%"><img src="https://user-images.githubusercontent.com/52243808/76209281-d2abe400-6244-11ea-864c-320cf1c46be6.png" width="50%">
 
-#### Arduino & RasberryPi
-* Arduino
+#### Arduino
 <img src="https://user-images.githubusercontent.com/37360089/76210683-f58bc780-6247-11ea-8ccc-aaa18010fc40.jpg" width="50%"><img src="https://user-images.githubusercontent.com/37360089/72738200-6a496a80-3be4-11ea-87ab-3dd8c8f5f42d.png" width="50%">
 
-* RasberryPi
+#### RasberryPi
 <img src="https://user-images.githubusercontent.com/37360089/76210681-f3c20400-6247-11ea-8641-bcb040c61425.jpg" width="50%">
 
 #### Server
