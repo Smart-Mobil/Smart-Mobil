@@ -1,5 +1,6 @@
 # KPUforMobil
-KPUforSound
+Korea Polytechnic University  
+Computer Engineering Senier Project  
 
 # 0. 프로젝트 명(Project Title)
 ## 원격 제어가 가능한 신생아 건강 스마트 모빌  
