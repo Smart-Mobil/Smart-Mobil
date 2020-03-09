@@ -1,4 +1,4 @@
-# KPUforMobil
+# SmartMobil
 Korea Polytechnic University  
 Computer Engineering Senier Project  
 
