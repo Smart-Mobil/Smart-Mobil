@@ -2,22 +2,22 @@
 KPUforSound
 
 # 0. 프로젝트 명(Project Title)
-## 원격 제어가 가능한 신생아 건강 스마트 모빌
-Remotely Controllable Smart Mobil for newborn baby
-Korea Polytechnic University
-Professor 공기석 Student 김진엽 박현욱 신용원
+## 원격 제어가 가능한 신생아 건강 스마트 모빌  
+Remotely Controllable Smart Mobil for newborn baby  
+Korea Polytechnic University  
+Professor 공기석 Student 김진엽 박현욱 신용원  
 
-# 1. Introduction
-주변 환경에 민감한 신생아의 건강
-Health of newborns sensitive to the surrounding environment
-동시에 여러가지 환경 데이터를 수집하는데 어려움을 겪는 부모
-Parents who have difficulty collecting various environmental data at the same time
-신생아와 밀접한 장난감일 모빌을 이용하여 환경 데이터 수집
-Collect environmental data using mobile, a toy closely related to newborn
-모빌을 이용한 스트리밍
-Streaming with Mobile
-애플리케이션과 웹을 이용한 육아 데이터 및 통계치 제공
-Providing parenting data and statistics using applications and the web
+# 1. Introduction  
+주변 환경에 민감한 신생아의 건강  
+Health of newborns sensitive to the surrounding environment  
+동시에 여러가지 환경 데이터를 수집하는데 어려움을 겪는 부모  
+Parents who have difficulty collecting various environmental data at the same time  
+신생아와 밀접한 장난감일 모빌을 이용하여 환경 데이터 수집  
+Collect environmental data using mobile, a toy closely related to newborn  
+모빌을 이용한 스트리밍  
+Streaming with Mobile  
+애플리케이션과 웹을 이용한 육아 데이터 및 통계치 제공  
+Providing parenting data and statistics using applications and the web  
 
 # 2. Proposal
 모빌에 부착된 다양한 모듈을 통해 환경 데이터 수집 및 영상 스트리밍
