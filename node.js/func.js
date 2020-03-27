@@ -2,13 +2,11 @@
 
 
 
-class func{
-    constructor() { this.config = [] }
 
   
 
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
-function mainFunction( argument1 ) {
+function main( argument1 ) {
     // Do Something
     if( argument1 === 'on'){ //스피커 ON
       /* a~g까지 알파벳들을 입력받아서  */
@@ -35,6 +33,6 @@ function mainFunction( argument1 ) {
   
     }
   
-  }
+  
 
 }
