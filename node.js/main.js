@@ -18,6 +18,7 @@ app.use(bodyParser.json()) // 바디 파싱
 // func class 생성
 
 var funcjs = require('./func')
+//const db = require('./models/findDB');
 
 app.listen(3000, () => {  //node.js 서버 실행
   console.log("Server has been started")
@@ -56,7 +57,7 @@ var recvData //body 에서 data를 받아옵니다.
 app.post("/data", function(req, res){
   recvData = req.body.data // input태그(name = data) 값을 받아옵니다. 
   console.log(recvData);
-  funcjs.mainFunction(recvData);
+  funcjs.onLed(recvData);
   
   res.render('./view_file/finish');
 });
