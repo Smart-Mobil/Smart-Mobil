@@ -59,7 +59,7 @@ app.post("/data", function(req, res){
   console.log(recvData);
   funcjs.onLed(recvData);
   
-  res.render('./view_file/finish');
+  res.render('finish', { title: './view_file/finish'});
 });
 
 

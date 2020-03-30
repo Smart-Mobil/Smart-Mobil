@@ -71,7 +71,7 @@ app.post("/data", function(req, res){
   console.log(recvData);
   mainFunction(recvData);
   
-  res.render('finish');
+  res.render('./view_file/finish');
 });
 
 
