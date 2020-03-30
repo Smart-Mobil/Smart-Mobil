@@ -1,4 +1,3 @@
-
 var express = require('express') // 파일 로드를 위한 모듈
 var fs = require('fs')   
 var app = express()
@@ -17,6 +16,7 @@ app.set('view engine', 'pug')
 app.use(bodyParser.json()) // 바디 파싱
 
 // func class 생성
+
 var funcjs = require('./func')
 
 app.listen(3000, () => {  //node.js 서버 실행
@@ -99,4 +99,5 @@ app.get("/hello", (req, res) => {
 
 
 });
+
 

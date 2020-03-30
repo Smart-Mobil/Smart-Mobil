@@ -2,6 +2,7 @@
 
 
 
+<<<<<<< HEAD
 // led
 var Gpio = require('pigpio').Gpio, //include pigpio to interact with the GPIO
 ledRed = new Gpio(4, {mode: Gpio.OUTPUT}), //use GPIO pin 4 as output for RED
@@ -14,6 +15,10 @@ blueRGB = 255; //set starting value of BLUE variable to off (255 for common anod
 ledRed.digitalWrite(1); // Turn RED LED off
 ledGreen.digitalWrite(1); // Turn GREEN LED off
 ledBlue.digitalWrite(1); // Turn BLUE LED off
+=======
+
+  
+>>>>>>> 639c8b1034767d2f4251dbc4e921ca552ded0bf8
 
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
 function main( argument1 ) {
@@ -43,5 +48,9 @@ function main( argument1 ) {
   
     }
   
-  }
+  
 
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 639c8b1034767d2f4251dbc4e921ca552ded0bf8
