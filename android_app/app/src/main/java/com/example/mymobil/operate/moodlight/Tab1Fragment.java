@@ -44,8 +44,8 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo("on");
-                        Message msg = handler.obtainMessage();
-                        handler.sendMessage(msg);
+                       // Message msg = handler.obtainMessage();
+                       // handler.sendMessage(msg);
                     }
                 }.start();
             }
@@ -57,8 +57,8 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo("off");
-                        Message msg = handler.obtainMessage();
-                        handler.sendMessage(msg);
+                       // Message msg = handler.obtainMessage();
+                      //  handler.sendMessage(msg);
                     }
                 }.start();
             }
@@ -73,8 +73,8 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo(String.valueOf(color));
-                        Message msg = handler.obtainMessage();
-                        handler.sendMessage(msg);
+                       // Message msg = handler.obtainMessage();
+                      //  handler.sendMessage(msg);
                     }
                 }.start();
             }
@@ -96,9 +96,10 @@ public class Tab1Fragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+/*
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         }
     };
+    */
 }
