@@ -1,5 +1,6 @@
 # SmartMobil
-Korea Polytechnic University  
+한국산업기술대학교 컴퓨터공학과 졸업작품
+Korea Polytechnic University 
 Computer Engineering Senier Project  
 
 --------------------------------------
