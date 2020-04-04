@@ -2,6 +2,8 @@
 Korea Polytechnic University  
 Computer Engineering Senier Project  
 
+--------------------------------------
+
 ### :book: 프로젝트명 
 #### 원격 제어가 가능한 신생아 건강 스마트 모빌  
 Remotely Controllable Smart Mobil for newborn baby  
