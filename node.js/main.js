@@ -20,9 +20,10 @@ app.use(bodyParser.json()) // 바디 파싱
 var funcjs = require('./func')
 //const db = require('./models/findDB');
 
-app.listen(3000, () => {  //node.js 서버 실행
-  console.log("Server has been started")
-})
+app.listen(3000, "0.0.0.0");
+//() => {  //node.js 서버 실행
+//  console.log("Server has been started")
+//})
 
 var val; // 임시로 센서값을 저장할 변수 
  
