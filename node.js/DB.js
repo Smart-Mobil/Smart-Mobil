@@ -7,12 +7,12 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-
-connection.query('SELECT * from Persons', function(err, rows, fields) {
+/*
+connection.query('SELECT * from s', function(err, rows, fields) {
   if (!err)
     console.log('The solution is: ', rows);
   else
     console.log('Error while performing Query.', err);
 });
-
+*/
 connection.end();

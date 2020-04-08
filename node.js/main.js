@@ -18,9 +18,14 @@ app.use(bodyParser.json()) // 바디 파싱
 // func class 생성
 
 var funcjs = require('./func')
+var dbjs = require('./DB')
 //const db = require('./models/findDB');
 
-app.listen(3000, "0.0.0.0");
+
+app.listen(3000, () => {  //node.js 서버 실행
+  console.log("시작합니다.")
+})
+
 //() => {  //node.js 서버 실행
 //  console.log("Server has been started")
 //})
@@ -33,6 +38,34 @@ serialPort.open(function () { //시리얼포트 열기
     if(val.length >= 1000000000 ){ // 특정 길이 이상이 되면 val 값을 줄여서 해결
       val = val.substring(1,1);  
     }
+    console.log(val);
+    
+    var d = new Date();
+    if (d.getSeconds == 0){ //정각일때만, 즉 1분당 하나만 저장하게끔 
+      var h1;
+      var h2;
+      var h3;
+      for(var i = val.length - 1; i>0; i--){
+        if(val[i] === '1'){
+          if(val[i+1] === ')'){
+            h1 = val.substring(i,i+8);
+          }
+        }
+        else if(val[i] === '2'){
+          if(val[i+1] === ')'){
+            h2 = val.substring(i,i+17);
+          }
+        }
+        else if(val[i] === '3'){
+          if(val[i+1] === ')'){
+            h3 = val.substring(i,i+10);
+          }
+        }
+        if( h1 && h2 && h3)
+          break;
+      }
+      
+   }
   });
 
 
