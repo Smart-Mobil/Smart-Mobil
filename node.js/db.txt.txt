@@ -1,0 +1,12 @@
+스키마명: smart mobil
+
+
+CREATE TABLE ENVIRONMENT (
+	   env_no     int NOT NULL auto_increment,
+       time        VARCHAR(30)  NOT NULL,
+       tempandhum    VARCHAR(30) NOT NULL,
+       temperature   VARCHAR(30) NOT NULL,
+	   dust          VARCHAR(30) NOT NULL,
+      CONSTRAINT PLAYER_PK PRIMARY KEY (env_no)
+
+);
