@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,18 @@ import android.widget.TextView;
 
 import com.example.mymobil.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 
 public class DdayFragment extends Fragment {
     private ImageView imageView;
-    private TextView ddayStart;
-    String dateStart;
+    private TextView ddayStartView, ddayView;
+    private String dateStart;
+    private long ddayDate;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
@@ -37,6 +42,7 @@ public class DdayFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -48,19 +54,20 @@ public class DdayFragment extends Fragment {
         // SharedPreferences 수정을 위한 Editor 객체를 얻어옵니다.
         editor = preferences.edit();
 
-        imageView=(ImageView) root.findViewById(R.id.image_calendar);
-       // imageView.setImageResource(R.drawable.ic_calendar);
+        imageView = (ImageView) root.findViewById(R.id.image_calendar);
+        // imageView.setImageResource(R.drawable.ic_calendar);
+        ddayStartView = (TextView) root.findViewById(R.id.dday_start);
+        ddayView = (TextView) root.findViewById(R.id.dday);
 
-        ddayStart=(TextView)root.findViewById(R.id.dday_start);
-
-        ddayStart.setText(preferences.getString("DDAY","달력을 클릭해주세요"));
+        ddayStartView.setText(preferences.getString("DDAY_START", "달력을 클릭해주세요"));
+        ddayView.setText("+ "+preferences.getString("DDAY", "0")+"일");
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 final Calendar cal = Calendar.getInstance();
-                DatePickerDialog dialog= new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         dateStart = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
@@ -72,14 +79,43 @@ public class DdayFragment extends Fragment {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        editor.putString("DDAY", dateStart);
+                        ddayCalculate();
+                        ddayStartView.setText(dateStart);
+                        ddayView.setText("+ "+String.valueOf(ddayDate)+" 일");
+                        editor.putString("DDAY_START", dateStart);
+                        editor.putString("DDAY", String.valueOf(ddayDate));
                         editor.commit();
-                        ddayStart.setText(dateStart);
                     }
                 });
             }
         });
 
         return root;
+    }
+
+    public void ddayCalculate() {
+        try {
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar todaCal = Calendar.getInstance();
+            Calendar ddayCal = Calendar.getInstance();
+
+            String[] date;
+            date = dateStart.split("-");
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]) - 1;
+            int day = Integer.parseInt(date[2]);
+
+            ddayCal.set(year, month, day);
+
+            long today = todaCal.getTimeInMillis() / (24 * 60 * 60 * 1000);
+            long dday = ddayCal.getTimeInMillis() / (24 * 60 * 60 * 1000);
+
+            long count = today - dday;
+
+            ddayDate = count;
+        } catch (Exception e) {
+            Log.d(TAG, e.toString());
+        }
     }
 }
