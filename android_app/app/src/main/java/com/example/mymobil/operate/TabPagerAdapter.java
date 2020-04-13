@@ -4,6 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.mymobil.operate.moodlight.Tab1Fragment;
+import com.example.mymobil.operate.music.Tab2Fragment;
+import com.example.mymobil.operate.servomotor.Tab3Fragment;
+
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     // Count number of tabs

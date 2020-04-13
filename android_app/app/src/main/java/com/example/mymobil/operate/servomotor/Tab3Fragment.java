@@ -1,4 +1,4 @@
-package com.example.mymobil.operate;
+package com.example.mymobil.operate.servomotor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
