@@ -35,8 +35,8 @@ public class Tab1Fragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_operate_tab1, container, false);
 
-        Button btnOn = root.findViewById(R.id.btnSend);
-        Button btnOff = root.findViewById(R.id.btnSend2);
+       final Button btnOn = root.findViewById(R.id.btnSend);
+        final Button btnOff = root.findViewById(R.id.btnSend2);
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -44,10 +44,12 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo("on");
-                       // Message msg = handler.obtainMessage();
-                       // handler.sendMessage(msg);
+                        // Message msg = handler.obtainMessage();
+                        // handler.sendMessage(msg);
                     }
                 }.start();
+                btnOn.setEnabled(false);
+                btnOff.setEnabled(true);
             }
         });
 
@@ -57,10 +59,12 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo("off");
-                       // Message msg = handler.obtainMessage();
-                      //  handler.sendMessage(msg);
+                        // Message msg = handler.obtainMessage();
+                        //  handler.sendMessage(msg);
                     }
                 }.start();
+                btnOff.setEnabled(false);
+                btnOn.setEnabled(true);
             }
         });
 
@@ -73,8 +77,8 @@ public class Tab1Fragment extends Fragment {
                 new Thread() {
                     public void run() {
                         postInfo(String.valueOf(color));
-                       // Message msg = handler.obtainMessage();
-                      //  handler.sendMessage(msg);
+                        // Message msg = handler.obtainMessage();
+                        //  handler.sendMessage(msg);
                     }
                 }.start();
             }
