@@ -1,10 +1,18 @@
 package com.example.mymobil;
 
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 
+import com.example.mymobil.sos.SosActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Base64;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -21,6 +29,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import java.security.MessageDigest;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -29,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //해시키 찾기
+        getAppKeyHash();
+
        // FloatingActionButton fab = findViewById(R.id.fab);
       /*  fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +60,28 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_env, R.id.nav_operate, R.id.nav_streaming,
-                R.id.nav_info)
+                R.id.nav_info,R.id.nav_dday)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                Log.e("Hash key", something);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString());
+        }
     }
 
     @Override
@@ -60,6 +91,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sos :
+                Intent intent = new Intent(MainActivity.this, SosActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_settings :
+                Intent intent2 = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent2);
+                return true;
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

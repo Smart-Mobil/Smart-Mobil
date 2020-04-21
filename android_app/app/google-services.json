@@ -45,6 +45,43 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:259016547463:android:89e22a22fcfedcf66cac22",
+        "android_client_info": {
+          "package_name": "com.jinyeob.myloginfacebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259016547463-0gevrkngfq5dgkdcv11tuiq066p1p8id.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jinyeob.myloginfacebook",
+            "certificate_hash": "c3e3d136848fb9ce8a2b74b48f6565d1779bee10"
+          }
+        },
+        {
+          "client_id": "259016547463-u9ak9ii17gsv8id9ancdc9vj1gr9hq7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZtU6H-Qz88DriwZ4_d1OO198tOfklDIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259016547463-u9ak9ii17gsv8id9ancdc9vj1gr9hq7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:259016547463:android:a59556da209f67896cac22",
         "android_client_info": {
           "package_name": "com.jinyeob.myphoto"
