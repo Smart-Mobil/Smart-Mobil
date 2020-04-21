@@ -34,4 +34,5 @@
         android:name="com.example.mymobil.dday.DdayFragment"
         android:label="@string/menu_dday"
         tools:layout="@layout/fragment_dday" />
+
 </navigation>

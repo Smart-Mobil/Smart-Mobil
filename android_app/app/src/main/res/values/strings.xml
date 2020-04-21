@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle">https://github.com/scenebyshin/SmartMobil</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="action_sos">Sos</string>
 
     <string name="menu_env">환경정보</string>
     <string name="menu_operate">무드등/음악/모빌 제어</string>
