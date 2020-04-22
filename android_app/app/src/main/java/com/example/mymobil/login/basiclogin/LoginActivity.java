@@ -1,4 +1,4 @@
-package com.example.mymobil.login;
+package com.example.mymobil.login.basiclogin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

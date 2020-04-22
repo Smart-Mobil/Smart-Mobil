@@ -9,10 +9,10 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,12 +32,13 @@ import net.daum.mf.map.api.MapView;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.mymobil.MainActivity;
 import com.example.mymobil.R;
 import com.example.mymobil.SettingActivity;
-
+/*
+* Update by Jinyeob on 2020.04.22
+* To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
+ */
 public class SosActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
-
     private static final String LOG_TAG = "SosActivity";
     private MapView mMapView;
     private TextView mtextView1, mtextView2, mtextView3;
@@ -67,7 +68,6 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         mtextView3 = (TextView) findViewById(R.id.textView_address);
 
         mSmsButton = (Button)findViewById(R.id.button_sms);
-        mKakaoButton = (Button)findViewById(R.id.button_kakao);
 
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
@@ -122,12 +122,13 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
         mapPointGeo = currentLocation.getMapPointGeoCoord();
-        mtextView1.setText(String.valueOf(mapPointGeo.latitude));
-        mtextView2.setText(String.valueOf(mapPointGeo.longitude));
+        mtextView1.setText(String.valueOf(mapPointGeo.latitude)); //위도
+        mtextView2.setText(String.valueOf(mapPointGeo.longitude)); //경도
 
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
 
-        mtextView3.setText(address);
+        mtextView3.setText(address); // 위치 텍스트 업데이트
+        mSmsButton.setEnabled(true); // 위치 업데이트 후에 버튼 활성화
 
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
     }

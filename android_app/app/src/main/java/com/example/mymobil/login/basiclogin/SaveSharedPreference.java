@@ -1,4 +1,4 @@
-package com.example.mymobil.login;
+package com.example.mymobil.login.basiclogin;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
