@@ -34,9 +34,11 @@ import java.util.Locale;
 
 import com.example.mymobil.R;
 import com.example.mymobil.SettingActivity;
-
+/*
+* Update by Jinyeob on 2020.04.22
+* To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
+ */
 public class SosActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
-    static final int PICK_CONTACT_REQUEST = 1;
     private static final String LOG_TAG = "SosActivity";
     private MapView mMapView;
     private TextView mtextView1, mtextView2, mtextView3;
