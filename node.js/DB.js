@@ -1,21 +1,36 @@
 var mysql      = require('mysql');
 
 var connection = mysql.createConnection({
-  host     : 'localhost:3306/smartmobil',
+  port: "3306",
+  host     : 'localhost',
   user     : 'root',
   password : '5289',
-  database : 'ENVIRONMENT'
+  database : 'smartmobil'
 });
 
-con.connect(function(err) {
-  if (err) throw err;
+
+connection.connect(function(err) {
+  
   console.log("Connected!");
-  var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
+  var sql = "INSERT INTO ENVIRONMENT (time, tempandhum, temperature, dust ) VALUES ('test', 'test', 'test', 'test')";
+  connection.query(sql, function (err, result) {
     console.log("1 record inserted");
   });
 });
+
+connection.query('select * from ENVIRONMENT', function (err, rows, fields) {
+  if (!err) {
+      console.log(rows);
+      console.log(fields);
+      var result = 'rows : ' + JSON.stringify(rows) + '<br><br>' +
+          'fields : ' + JSON.stringify(fields);
+      res.send(result);
+  } else {
+      console.log('query error : ' + err);
+      
+  }
+});
+connection.end();
 
 /*
 connection.connect();
