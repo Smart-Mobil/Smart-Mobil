@@ -10,3 +10,7 @@ CREATE TABLE ENVIRONMENT (
       CONSTRAINT PLAYER_PK PRIMARY KEY (env_no)
 
 );
+
+select * from ENVIRONMENT;
+use smartmobil;
+desc ENVIRONMENT;
