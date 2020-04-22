@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import com.example.mymobil.MainActivity;
 import com.example.mymobil.R;
-import com.example.mymobil.login.LoginActivity;
-import com.example.mymobil.login.SaveSharedPreference;
 
 public class FirstAuthActivity extends AppCompatActivity {
 
