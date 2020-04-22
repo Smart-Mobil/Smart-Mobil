@@ -13,10 +13,14 @@ import android.widget.TextView;
 import com.example.mymobil.R;
 
 import java.util.ArrayList;
+import android.os.Handler;
 
 /*
-** 2020.04.04 김진엽
-** bug: fragment 전환 시에도 노래가 나옴. 다시 돌아와서 중단 누르면 앱 중단됨
+* 2020.04.04 김진엽
+* bug: fragment 전환 시에도 노래가 나옴. 다시 돌아와서 중단 누르면 앱 중단됨
+
+* 2020.04.22 김진엽
+* bug fix: 3초 딜레이 후 멈추도록 수정.
 */
 
 public class ListAdapter extends BaseAdapter {
@@ -68,6 +72,12 @@ public class ListAdapter extends BaseAdapter {
 
                 mediaPlayer = MediaPlayer.create(mContext, val);
                 mediaPlayer.start();
+
+                (new Handler()).postDelayed(new Runnable() {
+                    public void run() {
+                        mediaPlayer.stop();
+                    }
+                }, 3000);//3초간 실행 후 음악 멈춤
             }
         });
 
