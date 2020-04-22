@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   port: "3306",
   host     : 'localhost',
   user     : 'root',
-  password : '5289',
+  password : '*B3ECDE53DBC07418E558CAE7F34AD5CC4761C4F6',
   database : 'smartmobil'
 });
 
