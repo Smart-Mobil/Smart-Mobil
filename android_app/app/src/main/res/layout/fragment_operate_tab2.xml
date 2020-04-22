@@ -1,12 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ListView
-        android:id="@+id/listview"
+    <data>
+        <variable
+            name="Tab2Fragment"
+            type="com.example.mymobil.operate.music.Tab2Fragment" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="206dp" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView_music1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1번 노래" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStart1}"
+                android:text="재생" />
+
+            <Button
+                android:id="@+id/btnStop1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStop1}"
+                android:text="정지" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_music2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2번 노래" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStart2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStart2}"
+                android:text="재생" />
+
+            <Button
+                android:id="@+id/btnStop2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStop2}"
+                android:text="정지" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_music3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3번 노래" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStart3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStart3}"
+                android:text="재생" />
+
+            <Button
+                android:id="@+id/btnStop3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{Tab2Fragment::OnClickStop3}"
+                android:text="정지" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

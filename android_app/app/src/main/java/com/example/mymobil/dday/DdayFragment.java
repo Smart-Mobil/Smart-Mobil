@@ -54,10 +54,10 @@ public class DdayFragment extends Fragment {
         // SharedPreferences 수정을 위한 Editor 객체를 얻어옵니다.
         editor = preferences.edit();
 
-        imageView = (ImageView) root.findViewById(R.id.image_calendar);
+        imageView = root.findViewById(R.id.image_calendar);
         // imageView.setImageResource(R.drawable.ic_calendar);
-        ddayStartView = (TextView) root.findViewById(R.id.dday_start);
-        ddayView = (TextView) root.findViewById(R.id.dday);
+        ddayStartView = root.findViewById(R.id.dday_start);
+        ddayView = root.findViewById(R.id.dday);
 
         ddayStartView.setText(preferences.getString("DDAY_START", "달력을 클릭해주세요"));
         ddayView.setText("+ "+preferences.getString("DDAY", "0")+"일");
@@ -81,7 +81,7 @@ public class DdayFragment extends Fragment {
                     public void onDismiss(DialogInterface dialog) {
                         ddayCalculate();
                         ddayStartView.setText(dateStart);
-                        ddayView.setText("+ "+String.valueOf(ddayDate)+" 일");
+                        ddayView.setText("+ "+ ddayDate +" 일");
                         editor.putString("DDAY_START", dateStart);
                         editor.putString("DDAY", String.valueOf(ddayDate));
                         editor.commit();

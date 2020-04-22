@@ -20,14 +20,14 @@ public class OperateFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_operate, container, false);
         // Initializing the TabLayout
-        tabLayout = (TabLayout) root.findViewById(R.id.tablayout);
+        tabLayout = root.findViewById(R.id.tablayout);
          tabLayout.addTab(tabLayout.newTab().setText("무드등"));
         tabLayout.addTab(tabLayout.newTab().setText("음악"));
         tabLayout.addTab(tabLayout.newTab().setText("모빌동작"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // Initializing ViewPager
-        viewPager = (ViewPager) root.findViewById(R.id.viewpager);
+        viewPager = root.findViewById(R.id.viewpager);
 
         // Creating TabPagerAdapter adapter
         TabPagerAdapter pagerAdapter = new TabPagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());

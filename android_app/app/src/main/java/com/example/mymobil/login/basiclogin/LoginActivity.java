@@ -31,15 +31,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        idView = (EditText) findViewById(R.id.editText_id);
-        passwdView = (EditText) findViewById(R.id.editText_passwd);
-        loginButton = (Button) findViewById(R.id.button_login);
-        autoLogin = (CheckBox) findViewById(R.id.checkBox);
-        scrollView = (ScrollView) findViewById(R.id.scroll_area);
+        idView = findViewById(R.id.editText_id);
+        passwdView = findViewById(R.id.editText_passwd);
+        loginButton = findViewById(R.id.button_login);
+        autoLogin = findViewById(R.id.checkBox);
+        scrollView = findViewById(R.id.scroll_area);
 
         if (SaveSharedPreference.getUserName(LoginActivity.this).length() != 0 && SaveSharedPreference.getUserPasswd(LoginActivity.this).length() != 0) {
-            idView.setText(SaveSharedPreference.getUserName(this).toString());
-            passwdView.setText(SaveSharedPreference.getUserPasswd(this).toString());
+            idView.setText(SaveSharedPreference.getUserName(this));
+            passwdView.setText(SaveSharedPreference.getUserPasswd(this));
             autoLogin.setChecked(true);
         }
 

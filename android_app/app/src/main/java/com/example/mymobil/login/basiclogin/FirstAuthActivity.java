@@ -26,8 +26,8 @@ public class FirstAuthActivity extends AppCompatActivity {
         } else {
             // Call Next Activity
             intent = new Intent(FirstAuthActivity.this, MainActivity.class);
-            intent.putExtra("id", SaveSharedPreference.getUserName(this).toString());
-            intent.putExtra("passwd", SaveSharedPreference.getUserPasswd(this).toString());
+            intent.putExtra("id", SaveSharedPreference.getUserName(this));
+            intent.putExtra("passwd", SaveSharedPreference.getUserPasswd(this));
 
             startActivity(intent);
             this.finish();

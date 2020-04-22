@@ -60,14 +60,14 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기
 
-        mMapView = (MapView) findViewById(R.id.map_view);
+        mMapView = findViewById(R.id.map_view);
         mMapView.setCurrentLocationEventListener(this);
 
-        mtextView1 = (TextView) findViewById(R.id.textView1);
-        mtextView2 = (TextView) findViewById(R.id.textView2);
-        mtextView3 = (TextView) findViewById(R.id.textView_address);
+        mtextView1 = findViewById(R.id.textView1);
+        mtextView2 = findViewById(R.id.textView2);
+        mtextView3 = findViewById(R.id.textView_address);
 
-        mSmsButton = (Button)findViewById(R.id.button_sms);
+        mSmsButton = findViewById(R.id.button_sms);
 
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
@@ -294,7 +294,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
             List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                StringBuilder strReturnedAddress = new StringBuilder();
 
 
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {

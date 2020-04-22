@@ -50,7 +50,8 @@ public class EnvFragment extends Fragment {
 
             int idx = dustString.indexOf(",");
 
-            if (0 < idx || idx + 1 < dustString.indexOf("/")) {
+
+            if (0 < idx && idx + 1 < dustString.indexOf("/")) {
                 dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
                 dustString2 = "PM2.5 : " + dustString.substring(idx + 1, dustString.indexOf("/")) + "\n\n";
 
@@ -72,7 +73,7 @@ public class EnvFragment extends Fragment {
 
             int idx2 = THString.indexOf(",");
 
-            if (0 < idx2 || idx2 + 1 < THString.indexOf("/")) {
+            if (0 < idx2 && idx2 + 1 < THString.indexOf("/")) {
                 tempString = "<온습도>\n온도 : " + THString.substring(0, idx2) + "\n";
                 humString = "습도 : " + THString.substring(idx2 + 1, THString.indexOf("/")) + "\n\n";
 
@@ -114,6 +115,7 @@ public class EnvFragment extends Fragment {
             ele1 = doc.select("h1").first();
             ele2 = doc.select("p").first();
             ele3 = doc.select("i").first();
+
 
             String dust = getDust(ele1.text());
             String temphum = getTempHum(ele2.text());
