@@ -67,7 +67,6 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         mtextView3 = (TextView) findViewById(R.id.textView_address);
 
         mSmsButton = (Button)findViewById(R.id.button_sms);
-        mKakaoButton = (Button)findViewById(R.id.button_kakao);
 
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
@@ -128,6 +127,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
 
         mtextView3.setText(address);
+        mSmsButton.setEnabled(true);
 
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
     }
