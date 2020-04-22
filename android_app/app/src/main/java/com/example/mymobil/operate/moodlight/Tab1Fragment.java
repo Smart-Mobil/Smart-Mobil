@@ -89,7 +89,7 @@ public class Tab1Fragment extends Fragment {
 
     private void postInfo(String value) {
         try {
-            Connection.Response res = Jsoup.connect("http://172.30.1.8:3000/data")
+            Connection.Response res = Jsoup.connect("http://1.241.96.225:3000/data")
                     .data("data", value)
                     .timeout(5000)
                     .maxBodySize(0)

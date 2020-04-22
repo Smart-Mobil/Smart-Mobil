@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class EnvFragment extends Fragment {
     private TextView textView;
-
+    private String EnvUrl="http://1.241.96.225:3000/hello";
     private String allString = "";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -105,7 +105,7 @@ public class EnvFragment extends Fragment {
         allString = "";
 
         try {
-            Document doc = Jsoup.connect("http://172.30.1.8:3000/hello").get();
+            Document doc = Jsoup.connect(EnvUrl).get();
 
             System.out.println(doc);
 
@@ -113,7 +113,7 @@ public class EnvFragment extends Fragment {
 
             ele1 = doc.select("h1").first();
             ele2 = doc.select("p").first();
-            ele3 = doc.select("h2").first();
+            ele3 = doc.select("i").first();
 
             String dust = getDust(ele1.text());
             String temphum = getTempHum(ele2.text());

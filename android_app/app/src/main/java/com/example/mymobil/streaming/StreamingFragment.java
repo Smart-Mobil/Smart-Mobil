@@ -34,7 +34,7 @@ Update by Jinyeob on 2020.04.22
 public class StreamingFragment extends Fragment {
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
-    private String url = "http://210.99.254.221:8080/stream"; //UV4L 링크
+    private String url = "http://1.241.96.225:9090/stream"; //UV4L 링크
     private Button btn_capture;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,7 +65,9 @@ public class StreamingFragment extends Fragment {
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        mWebView.loadUrl(/*url*/"https://www.youtube.com/"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+        mWebView.loadUrl(/*url*/url); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         btn_capture.setEnabled(true);
 
