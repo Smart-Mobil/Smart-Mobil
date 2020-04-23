@@ -45,9 +45,14 @@ public class SettingActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id){
-                Toast.makeText(getApplicationContext(),
-                        myAdapter.getItem(position).getSettingName(),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), myAdapter.getItem(position).getSettingName(), Toast.LENGTH_SHORT).show();
+
+                switch(position){
+                    case 0:
+                    case 1:
+                    case 2:
+                    default:
+                }
             }
         });
     }
