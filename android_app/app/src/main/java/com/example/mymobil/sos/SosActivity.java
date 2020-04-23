@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -52,6 +53,9 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     MapPoint.GeoCoordinate mapPointGeo;
     String address;
 
+    SharedPreferences sharedPreferences;
+    String phoneNo = " ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +80,12 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
 
         checkSmsPermission();
 
+        sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
+        phoneNo = sharedPreferences.getString("SAVED_SOS", "");
+
         mSmsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNo = "01071246311";
-
                 try {
                     //전송
                     SmsManager smsManager = SmsManager.getDefault();

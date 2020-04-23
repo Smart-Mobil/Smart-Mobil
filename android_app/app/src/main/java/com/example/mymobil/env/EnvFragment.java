@@ -1,6 +1,8 @@
 package com.example.mymobil.env;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,24 +10,50 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import com.example.mymobil.R;
+import com.example.mymobil.setting.SettingActivity;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.util.regex.PatternSyntaxException;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class EnvFragment extends Fragment {
     private TextView textView;
-    private String EnvUrl="http://1.241.96.225:3000/hello";
+    private SharedPreferences sharedPreferences;
+
+    private String EnvUrl = " ";
     private String allString = "";
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_env, container, false);
-        textView =root.findViewById(R.id.text_env);
+
+        sharedPreferences = getActivity().getSharedPreferences("shared", MODE_PRIVATE);
+
+        textView = root.findViewById(R.id.text_env);
+
+        try {
+            if (EnvUrl.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+            else{
+
+            }
+        } catch (PatternSyntaxException e) {
+            System.err.println("An Exception Occured");
+            e.printStackTrace();
+        }
         new Thread() {
             public void run() {
                 while (true) {
@@ -34,6 +62,8 @@ public class EnvFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    EnvUrl = sharedPreferences.getString("SAVED_URL", "");
+
                     getInfo();
                     handler.sendMessage(handler.obtainMessage());
                 }
@@ -41,6 +71,7 @@ public class EnvFragment extends Fragment {
         }.start();
         return root;
     }
+
     private String getDust(String dustString) {
         //미세먼지
         String dustString1 = "", dustString2 = ""; //substr용 임시 변수
@@ -133,10 +164,9 @@ public class EnvFragment extends Fragment {
     Handler handler = new Handler() {
         @SuppressLint("SetTextI18n")
         public void handleMessage(Message msg) {
-            if(allString.equals("")||allString.equals(" ")||allString.equals("   ")){
+            if (allString.equals("") || allString.equals(" ") || allString.equals("   ")) {
                 textView.setText("Connection Fail!! 연결 확인해주세요.");
-            }
-            else {
+            } else {
                 textView.setText(allString);
             }
         }
