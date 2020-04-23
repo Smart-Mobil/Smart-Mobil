@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.mymobil.R;
-import com.example.mymobil.SettingActivity;
+import com.example.mymobil.setting.SettingActivity;
 /*
 * Update by Jinyeob on 2020.04.22
 * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)

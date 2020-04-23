@@ -18,7 +18,7 @@
         <activity android:name=".login.LoginGoogleActivity">
 
         </activity>
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".login.RegisterActivity" />
         <activity
             android:name=".MainActivity"
