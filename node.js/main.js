@@ -26,9 +26,7 @@ app.listen(3000, () => {  //node.js 서버 실행
   console.log("시작합니다.")
 })
 
-//() => {  //node.js 서버 실행
-//  console.log("Server has been started")
-//})
+// wait함수 
 function wait(msecs)
 {
 var start = new Date().getTime();
@@ -47,11 +45,11 @@ var val; // 임시로 센서값을 저장할 변수
 serialPort.open(function () { //시리얼포트 열기
     serialPort.on('data',function(data){ //시리얼데이터 송신
     val += data;   // 변수에 데이터를 저장하며
-    if(val.length >= 10000){ // 특정 길이 이상이 되면 val 값을 줄여서 해결
-      val = val.substring(1,1);  
+    if(val.length >= 1000000){ // 특정 길이 이상이 되면 val 값을 줄여서 해결
+      val = val.substring(1,200);  
     }
    
-    wait(1000);
+   // wait(2000);
     var d = new Date();
     
     if (d.getSeconds() === 1){ //정각일때만, 즉 1분당 하나만 저장하게끔
@@ -78,6 +76,9 @@ serialPort.open(function () { //시리얼포트 열기
         if( h1 && h2 && h3)
           break;
       }
+      funcjs.onLed(recvData);
+      dbjs.adddata(d,h1,h3,h2);
+
       
    }
   });

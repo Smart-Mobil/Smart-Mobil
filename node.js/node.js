@@ -95,7 +95,7 @@ app.get("/hello", (req, res) => {
     }
     else if(val[i] === '3'){
       if(val[i+1] === ')'){
-        h3 = val.substring(i,i+10);
+        h3 = val.substring(i,i+11);
       }
     }
     if( h1 && h2 && h3)

@@ -10,32 +10,22 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-console.log("Connected!");
+//console.log("Connected!");
 
-
+exports.adddata = function main( argument1,argument2, argument3, argument4 ) {
+  console.log("Asddas");
   var sql = "INSERT INTO ENVIRONMENT (time, tempandhum, temperature, dust ) VALUES (?,?,?,?)";
-  var params = ['test title','testuser','testpw','testcontent'];
+  var params =[ argument1, argument2, argument3, argument4]
 
   connection.query(sql,params,function(err,rows,fields) {
     if(err){
       console.log(err);
     }else{
       console.log(rows.insertId);
-    }
-  });
+    }  });
 
 
-var sql2 = 'SELECT * FROM ENVIRONMENT';
-
-connection.query(sql2,function(err,rows,fields) {
-  if(err){
-    console.log(err);
-  }else{
-    for(var i =0;i<rows.length;i++){
-      console.log(rows[i].board_title);
-    }
-  }
-});
+}
 
 connection.end();
 
