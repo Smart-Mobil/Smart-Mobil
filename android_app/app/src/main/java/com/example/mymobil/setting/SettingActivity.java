@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.mymobil.MainActivity;
 import com.example.mymobil.R;
+import com.example.mymobil.env.EnvFragment;
 import com.example.mymobil.sos.SosActivity;
 
 import java.util.ArrayList;
@@ -29,9 +31,18 @@ import java.util.ArrayList;
  * 3-2. 알람 시간 설정
  * 4. 아기 이름, 디데이 날짜 설정
  */
+
+/*
+ * Update by Jinyeob on 2020.04.24
+ * onStop 추가
+ * 주석 추가
+ */
 public class SettingActivity extends AppCompatActivity {
     ArrayList<item_list> settingDataList;
     SharedPreferences sharedPreferences;
+    private String settingUrl = "";
+    private String settingSms = "";
+    EnvFragment envFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +51,9 @@ public class SettingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기
 
-
+/*
+리스트뷰 설정
+ */
         this.InitializesettingData();
 
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -48,18 +61,24 @@ public class SettingActivity extends AppCompatActivity {
 
         listView.setAdapter(myAdapter);
 
+        //url용 sharedPreferences
         sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
 
+        //리스트뷰 이벤트리스너
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Toast.makeText(getApplicationContext(), myAdapter.getItem(position).getSettingName(), Toast.LENGTH_SHORT).show();
+                //터치한 목록 이름 토스트 ㅎ
+                //Toast.makeText(getApplicationContext(), myAdapter.getItem(position).getSettingName(), Toast.LENGTH_SHORT).show();
 
+                //리스트뷰 목록에 따라 조건문 실행
                 switch (position) {
                     case 0:
+                        //url 입력 다이얼로그
                         urlDialog();
                         break;
                     case 1:
+                        //전화번호 입력 다이얼로그
                         sosDialog();
                         break;
                     case 2:
@@ -87,38 +106,46 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
+    /* 리스트뷰 목록 추가시 여기에 */
     public void InitializesettingData() {
         settingDataList = new ArrayList<item_list>();
 
         settingDataList.add(new item_list(R.drawable.ic_menu_manage, "URL 설정", "접속 URL을 설정합니다."));
         settingDataList.add(new item_list(R.drawable.ic_menu_manage, "SOS 수신번호 설정", "SOS 송신할 번호를 설정합니다."));
-        settingDataList.add(new item_list(R.drawable.ic_menu_manage, "아기 정보 설정", "아기 이름과 생일을 입력합니다"));
+        //settingDataList.add(new item_list(R.drawable.ic_menu_manage, "아기 정보 설정", "아기 이름과 생일을 입력합니다"));
     }
 
+    /* url 입력 다이얼로그 */
     public void urlDialog() {
         AlertDialog.Builder ad = new AlertDialog.Builder(SettingActivity.this);
 
-        String text = sharedPreferences.getString("SAVED_URL", "http://1.241.96.225:3000/hello");
+        //저장된 url 있습니꽈?
+        String text = sharedPreferences.getString("SAVED_URL", "");
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //다이얼로그 설정
         ad.setTitle("URL 설정");
         ad.setMessage("접속 URL을 입력해주세요.");
 
+        //다이얼로그 에디트텍스트에, 기존입력된 url set
         final EditText et = new EditText(SettingActivity.this);
         ad.setView(et);
         et.setText(text);
 
-        ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        //확인 버튼
+        ad.setPositiveButton("저장", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editor.putString("SAVED_URL", et.getText().toString());
+                settingUrl = et.getText().toString();
+                editor.putString("SAVED_URL", settingUrl);
                 editor.commit();
+                Toast.makeText(getApplicationContext(), "URL 저장 완료", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
         });
 
-        ad.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -131,7 +158,7 @@ public class SettingActivity extends AppCompatActivity {
     public void sosDialog() {
         AlertDialog.Builder ad = new AlertDialog.Builder(SettingActivity.this);
 
-        String text = sharedPreferences.getString("SAVED_SMS", "01071246311");
+        String text = sharedPreferences.getString("SAVED_SMS", "");
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ad.setTitle("SOS 설정");
@@ -141,17 +168,19 @@ public class SettingActivity extends AppCompatActivity {
         ad.setView(et);
         et.setText(text);
 
-        ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editor.putString("SAVED_SMS", et.getText().toString());
+                settingSms = et.getText().toString();
+                editor.putString("SAVED_SMS", settingSms);
                 editor.commit();
+                Toast.makeText(getApplicationContext(), "번호 저장 완료", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
         });
 
-        ad.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -159,5 +188,25 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         ad.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        /*
+        //SettingActivity가 쏜 작은 url........ ^^
+        envFragment = new EnvFragment();
+        Bundle bundle = new Bundle();
+
+        bundle.putString("url",settingUrl);
+
+        envFragment.setArguments(bundle);
+        Toast.makeText(getApplicationContext(), "SettingActivity 종료", Toast.LENGTH_LONG).show();
+        */
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+
+        finish();
     }
 }

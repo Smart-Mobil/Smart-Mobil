@@ -38,6 +38,11 @@ import com.example.mymobil.setting.SettingActivity;
 * Update by Jinyeob on 2020.04.22
 * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
  */
+
+/*
+ * Update by Jinyeob on 2020.04.24
+ * 전화번호 셋팅 추가 완료
+ */
 public class SosActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
     private static final String LOG_TAG = "SosActivity";
     private MapView mMapView;
@@ -81,7 +86,15 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         checkSmsPermission();
 
         sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
-        phoneNo = sharedPreferences.getString("SAVED_SOS", "");
+        phoneNo = sharedPreferences.getString("SAVED_SMS", "");
+
+        if(phoneNo.equals("")){
+            Toast.makeText(this, "SOS 송신할 전화번호를 입력해주세요.", Toast.LENGTH_LONG).show();
+
+            Intent it = new Intent(this, SettingActivity.class);
+            startActivity(it);
+            finish();
+        }
 
         mSmsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +105,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
                     smsManager.sendTextMessage(phoneNo, null, address, null, null);
                     Toast.makeText(getApplicationContext(), "전송 완료", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "전송 실패", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "전송 실패, 전화번호를 설정해주세요.", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
