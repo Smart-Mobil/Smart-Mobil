@@ -35,8 +35,8 @@ import java.util.Locale;
 import com.example.mymobil.R;
 import com.example.mymobil.setting.SettingActivity;
 /*
-* Update by Jinyeob on 2020.04.22
-* To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
+ * Update by Jinyeob on 2020.04.22
+ * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
  */
 
 /*
@@ -49,7 +49,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     private TextView mtextView1, mtextView2, mtextView3;
     private Button mSmsButton, mKakaoButton;
 
-    static final int SMS_SEND_PERMISSON=1;
+    static final int SMS_SEND_PERMISSON = 1;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -88,7 +88,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
         phoneNo = sharedPreferences.getString("SAVED_SMS", "");
 
-        if(phoneNo.equals("")){
+        if (phoneNo.equals("")) {
             Toast.makeText(this, "SOS 송신할 전화번호를 입력해주세요.", Toast.LENGTH_LONG).show();
 
             Intent it = new Intent(this, SettingActivity.class);
@@ -116,16 +116,16 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                 finish();
                 return true;
             }
-            case R.id.action_settings :
+            case R.id.action_settings:
                 Intent intent2 = new Intent(SosActivity.this, SettingActivity.class);
                 startActivity(intent2);
                 return true;
-            default :
-                return super.onOptionsItemSelected(item) ;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -333,24 +333,24 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         return strAdd;
     }
 
-    void checkSmsPermission(){
+    void checkSmsPermission() {
         //권한이 부여되어 있는지 확인
-        int permissonCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        int permissonCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
 
-        if(permissonCheck == PackageManager.PERMISSION_GRANTED){
+        if (permissonCheck == PackageManager.PERMISSION_GRANTED) {
             //.makeText(getApplicationContext(), "SMS 수신권한 있음", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "SMS 수신권한 없음", Toast.LENGTH_SHORT).show();
             //권한설정 dialog에서 거부를 누르면
             //ActivityCompat.shouldShowRequestPermissionRationale 메소드의 반환값이 true가 된다.
             //단, 사용자가 "Don't ask again"을 체크한 경우
             //거부하더라도 false를 반환하여, 직접 사용자가 권한을 부여하지 않는 이상, 권한을 요청할 수 없게 된다.
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
                 //이곳에 권한이 왜 필요한지 설명하는 Toast나 dialog를 띄워준 후, 다시 권한을 요청한다.
                 Toast.makeText(getApplicationContext(), "SMS권한이 필요합니다", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
-            }else{
-                ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
             }
         }
     }

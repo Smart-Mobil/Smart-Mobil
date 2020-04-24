@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.util.regex.PatternSyntaxException;
 
 import static android.content.Context.MODE_PRIVATE;
+
 /*
  * Add by Jinyeob
  *
@@ -40,6 +41,7 @@ public class EnvFragment extends Fragment {
     private TextView textView;
     private String EnvUrl = "";
     private String allString = "";
+
     //Bundle extra;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,9 +61,10 @@ public class EnvFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared", MODE_PRIVATE);
         EnvUrl = sharedPreferences.getString("SAVED_URL", "");
+        EnvUrl = EnvUrl.concat(":3000");
 
         /* 저장된 URL이 있는지 먼저 검사한다. */
-        if (EnvUrl.equals("") ) {
+        if (EnvUrl.equals("")) {
             Toast.makeText(getActivity(), "URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
 
             Intent it = new Intent(getActivity(), SettingActivity.class);

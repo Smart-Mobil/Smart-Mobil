@@ -1,6 +1,8 @@
 package com.example.mymobil.streaming;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -9,6 +11,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,21 +23,28 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymobil.R;
+import com.example.mymobil.setting.SettingActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Objects;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /*
+ * Update by Jinyeob on 2020.04.22
+ * Add capture button
+ */
 
-Update by Jinyeob on 2020.04.22
-- Add capture button
-
-*/
+/*
+ * Update by Jinyeob on 2020.04.24
+ * Url 셋팅 추가 완료
+ * Url 검사하는 코드 추가
+ */
 public class StreamingFragment extends Fragment {
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
-    private String url = "http://1.241.96.225:9090/stream"; //UV4L 링크
+    private String url = ""; //UV4L 링크
     private Button btn_capture;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,42 +53,64 @@ public class StreamingFragment extends Fragment {
 
         grantExternalStoragePermission();
 
-        btn_capture= root.findViewById(R.id.button_capture);
+        btn_capture = root.findViewById(R.id.button_capture);
 
         if (btn_capture.isEnabled()) {
             btn_capture.setEnabled(false);
         }
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared", MODE_PRIVATE);
+        url = sharedPreferences.getString("SAVED_URL", "");
+        url = url.concat(":9090/stream");
 
-        // 웹뷰 시작
-        mWebView = root.findViewById(R.id.webView);
+        /* 저장된 URL이 있는지 먼저 검사한다. */
+        if (url.equals("")) {
+            Toast.makeText(getActivity(), "URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
 
-        mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
-        mWebSettings = mWebView.getSettings(); //세부 세팅 등록
-        mWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
-        mWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
-        mWebSettings.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
-        mWebSettings.setLoadWithOverviewMode(true); // 메타태그 허용 여부
-        mWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
-        mWebSettings.setSupportZoom(true); // 화면 줌 허용 여부
-        mWebSettings.setBuiltInZoomControls(false); // 화면 확대 축소 허용 여부
-        mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
-        mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
-        mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
-        mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            Intent it = new Intent(getActivity(), SettingActivity.class);
+            startActivity(it);
 
-        mWebView.setInitialScale(1);
+            getActivity().finish();
+        }
 
-        mWebView.loadUrl(/*url*/url); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        if (URLUtil.isValidUrl(url)) {
 
-        btn_capture.setEnabled(true);
+            // 웹뷰 시작
+            mWebView = root.findViewById(R.id.webView);
 
-        btn_capture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeScreenshot();
-            }
-        });
+            mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
+            mWebSettings = mWebView.getSettings(); //세부 세팅 등록
+            mWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
+            mWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
+            mWebSettings.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
+            mWebSettings.setLoadWithOverviewMode(true); // 메타태그 허용 여부
+            mWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
+            mWebSettings.setSupportZoom(true); // 화면 줌 허용 여부
+            mWebSettings.setBuiltInZoomControls(false); // 화면 확대 축소 허용 여부
+            mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+            mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
+            mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+            mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
+            mWebView.setInitialScale(1);
+
+            mWebView.loadUrl(/*url*/url); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+
+            btn_capture.setEnabled(true);
+
+            btn_capture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    takeScreenshot();
+                }
+            });
+        } else {
+            Toast.makeText(getActivity(), "잘못된 URL 주소입니다. URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
+
+            Intent it = new Intent(getActivity(), SettingActivity.class);
+            startActivity(it);
+
+            getActivity().finish();
+        }
         return root;
     }
 
@@ -102,7 +134,7 @@ public class StreamingFragment extends Fragment {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
             outputStream.flush();
             outputStream.close();
-            Toast.makeText(getActivity(), "캡쳐완료"+mPath, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "캡쳐완료" + mPath, Toast.LENGTH_SHORT).show();
         } catch (Throwable e) {
             // Several error may come out with file handling or OOM
             Toast.makeText(getActivity(), "캡쳐실패", Toast.LENGTH_SHORT).show();

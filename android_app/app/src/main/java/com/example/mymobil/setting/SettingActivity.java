@@ -21,6 +21,8 @@ import com.example.mymobil.sos.SosActivity;
 
 import java.util.ArrayList;
 
+import static android.text.InputType.TYPE_CLASS_NUMBER;
+
 /*
  * Add by Jinyeob 2020.04.23
  * 셋팅기능
@@ -125,7 +127,7 @@ public class SettingActivity extends AppCompatActivity {
 
         //다이얼로그 설정
         ad.setTitle("URL 설정");
-        ad.setMessage("접속 URL을 입력해주세요.");
+        ad.setMessage("접속 URL을 입력해주세요. (포트번호 제외. 예시: http://1.241.96.225");
 
         //다이얼로그 에디트텍스트에, 기존입력된 url set
         final EditText et = new EditText(SettingActivity.this);
@@ -165,6 +167,7 @@ public class SettingActivity extends AppCompatActivity {
         ad.setMessage("SOS 송신할 번호를 입력해주세요.");
 
         final EditText et = new EditText(SettingActivity.this);
+        et.setInputType(TYPE_CLASS_NUMBER);
         ad.setView(et);
         et.setText(text);
 
