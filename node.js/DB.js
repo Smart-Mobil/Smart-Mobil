@@ -9,10 +9,11 @@ var connection = mysql.createConnection({
   insecureAuth : true
 });
 
-connection.connect();
-//console.log("Connected!");
 
+//console.log("Connected!");
+connection.connect();
 exports.adddata = function main( argument1,argument2, argument3, argument4 ) {
+  
   console.log("Asddas");
   var sql = "INSERT INTO ENVIRONMENT (time, tempandhum, temperature, dust ) VALUES (?,?,?,?)";
   var params =[ argument1, argument2, argument3, argument4]
@@ -24,10 +25,10 @@ exports.adddata = function main( argument1,argument2, argument3, argument4 ) {
       console.log(rows.insertId);
     }  });
 
+   // connection.end();
 
-}
+};
 
-connection.end();
 
 /*
 connection.connect();

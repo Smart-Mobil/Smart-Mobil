@@ -11,13 +11,16 @@ ledRed.digitalWrite(1); // Turn RED LED off
 ledGreen.digitalWrite(1); // Turn GREEN LED off
 ledBlue.digitalWrite(1); // Turn BLUE LED off
 
+
+// 스피커기능
+var player = require('play-sound')(opts = {})
+
+
+
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
 exports.onLed = function main( argument1 ) {
 
-
   // led
-
-
     // Do Something
     if( argument1 === 'on'){ //스피커 ON
       /* a~g까지 알파벳들을 입력받아서  */
@@ -45,4 +48,73 @@ exports.onLed = function main( argument1 ) {
     }
   
 }
+ 
+var audio
+exports.onSpeaker = function main2 (argument1,audio){
 
+  if( argument1 === 'stop'){ //스피커 OFF
+    audio.kill()
+  }
+  else if( argument1 === 'start1'){
+    audio = player.play('./sound_file/a.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+  }
+
+  else if( argument1 === 'start2'){
+    audio = player.play('./sound_file/b.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+  }
+
+  else if( argument1 === 'start3'){
+    audio = player.play('./sound_file/c.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+  }
+
+  else if( argument1 === 'start4'){
+    audio = player.play('./sound_file/d.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start5'){
+    audio = player.play('./sound_file/e.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start6'){
+    audio = player.play('./sound_file/f.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start7'){
+    audio = player.play('./sound_file/g.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start8'){
+    audio = player.play('./sound_file/h.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start9'){
+    audio = player.play('./sound_file/i.mp3', function(err){
+      if (err) throw err
+    })
+  }
+
+  else if( argument1 === 'start10'){
+    audio = player.play('./sound_file/j.mp3', function(err){
+      if (err) throw err
+    })
+  }
+}

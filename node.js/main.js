@@ -48,10 +48,10 @@ serialPort.open(function () { //시리얼포트 열기
     if(val.length >= 1000000){ // 특정 길이 이상이 되면 val 값을 줄여서 해결
       val = val.substring(1,200);  
     }
-   
+   // console.log('입력'); 
    // wait(2000);
     var d = new Date();
-    
+
     if (d.getSeconds() === 1){ //정각일때만, 즉 1분당 하나만 저장하게끔
       console.log('안녕'); 
       var h1;
@@ -70,14 +70,14 @@ serialPort.open(function () { //시리얼포트 열기
         }
         else if(val[i] === '3'){
           if(val[i+1] === ')'){
-            h3 = val.substring(i,i+10);
+            h3 = val.substring(i,i+12);
           }
         }
         if( h1 && h2 && h3)
           break;
       }
-      funcjs.onLed(recvData);
-      dbjs.adddata(d,h1,h3,h2);
+      
+      dbjs.adddata(String(d),String(h1),String(h3),String(h2));
 
       
    }
@@ -102,12 +102,13 @@ app.get("/bye", (req, res) => { //바이
   })
 })
 
+var audio // 오디오를 담당하는 변수 
 var recvData //body 에서 data를 받아옵니다.
 app.post("/data", function(req, res){
   recvData = req.body.data // input태그(name = data) 값을 받아옵니다. 
   console.log(recvData);
   funcjs.onLed(recvData);
-  
+  audio = funcjs.onSpeaker(recvData,audio);
   res.render('finish', { title: './view_file/finish'});
 });
 
@@ -132,7 +133,7 @@ app.get("/hello", (req, res) => {
     }
     else if(val[i] === '3'){
       if(val[i+1] === ')'){
-        h3 = val.substring(i,i+10);
+        h3 = val.substring(i,i+12);
       }
     }
     if( h1 && h2 && h3)
