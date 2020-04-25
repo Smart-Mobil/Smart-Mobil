@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/music1"
+        android:title="1번" />
+    <item
+        android:id="@+id/music2"
+        android:title="2번" />
+    <item
+        android:id="@+id/music3"
+        android:title="3번" />
+    <item
+        android:id="@+id/music4"
+        android:title="4번" />
+    <item
+        android:id="@+id/music5"
+        android:title="5번" />
+    <item
+        android:id="@+id/music6"
+        android:title="6번" />
+    <item
+        android:id="@+id/music7"
+        android:title="7번" />s
+    <item
+        android:id="@+id/music8"
+        android:title="8번" />
+    <item
+        android:id="@+id/music9"
+        android:title="9번" />
+    <item
+        android:id="@+id/music10"
+        android:title="10번" />
+</menu>
