@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.mymobil.operate.moodlight.Tab1Fragment;
 import com.example.mymobil.operate.music.Tab2Fragment;
-import com.example.mymobil.operate.servomotor.Tab3Fragment;
+import com.example.mymobil.operate.motor.Tab3Fragment;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 

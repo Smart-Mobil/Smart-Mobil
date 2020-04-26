@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -7,89 +9,86 @@
             type="com.example.mymobil.operate.music.Tab2Fragment" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/textView_music1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1번 노래" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imageView3"
+            android:onClick="@{Tab2Fragment::OnClickStop}"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginBottom="172dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/textView_currentMusic"
+            app:srcCompat="@android:drawable/ic_media_pause" />
 
-            <Button
-                android:id="@+id/btnStart1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStart1}"
-                android:text="재생" />
-
-            <Button
-                android:id="@+id/btnStop1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStop1}"
-                android:text="정지" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView_music2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2번 노래" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnStart2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStart2}"
-                android:text="재생" />
-
-            <Button
-                android:id="@+id/btnStop2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStop2}"
-                android:text="정지" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView4"
+            android:onClick="@{Tab2Fragment::OnClickStart}"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="143dp"
+            android:layout_marginEnd="161dp"
+            android:layout_marginRight="161dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_select"
+            app:layout_constraintTop_toBottomOf="@+id/textView_currentMusic"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:drawable/ic_media_play" />
 
         <TextView
-            android:id="@+id/textView_music3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3번 노래" />
-
-        <LinearLayout
+            android:id="@+id/textView_currentMusic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="17dp"
+            android:text=""
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-            <Button
-                android:id="@+id/btnStart3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStart3}"
-                android:text="재생" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="현재 재생중인 음악"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnStop3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{Tab2Fragment::OnClickStop3}"
-                android:text="정지" />
-        </LinearLayout>
-
-    </LinearLayout>
+        <Button
+            android:id="@+id/button_select"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:background="#FFBFBF"
+            android:onClick="@{Tab2Fragment::OnClickSelect}"
+            android:text="노래선택"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
