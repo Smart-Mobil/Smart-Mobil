@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -132,6 +133,7 @@ public class SettingActivity extends AppCompatActivity {
         //다이얼로그 에디트텍스트에, 기존입력된 url set
         final EditText et = new EditText(SettingActivity.this);
         ad.setView(et);
+        et.setTextColor(Color.parseColor("#000000"));
         et.setText(text);
 
         //확인 버튼

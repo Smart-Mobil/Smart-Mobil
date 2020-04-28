@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
     <com.google.android.gms.common.SignInButton
@@ -19,7 +20,7 @@
         android:id="@+id/Sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sing out"
+        android:text="sign out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -13,32 +13,40 @@
         android:layout_height="150dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/btnSend"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="70dp"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
+                android:background="@color/colorPrimary"
                 android:text="ON"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                app:cornerRadius="10dp"/>
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnSend2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Button
                 android:id="@+id/btnSend2"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="70dp"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@color/colorPrimary"
                 android:text="OFF"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                app:cornerRadius="10dp"/>
-        </LinearLayout>
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <TextView

@@ -60,7 +60,7 @@ public class StreamingFragment extends Fragment {
         }
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared", MODE_PRIVATE);
         url = sharedPreferences.getString("SAVED_URL", "");
-        url = url.concat(":9090/stream");
+        url = url.concat(":8080/stream");
 
         /* 저장된 URL이 있는지 먼저 검사한다. */
         if (url.equals("")) {

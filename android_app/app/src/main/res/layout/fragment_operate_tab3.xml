@@ -22,7 +22,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
+            app:srcCompat="@drawable/ic_mobil" />
+
+        <Button
+            android:id="@+id/button_right"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="@{Tab2Fragment::OnClickRight}"
+            android:text="시계방향"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/button_left"
+            app:layout_constraintEnd_toStartOf="@+id/button_left"
+            app:layout_constraintStart_toEndOf="@+id/textView5" />
 
         <Button
             android:id="@+id/button_motor_stop"
@@ -30,9 +44,10 @@
             android:layout_height="60dp"
             android:layout_marginEnd="29dp"
             android:layout_marginRight="29dp"
-            android:background="#FFBFBF"
             android:onClick="@{Tab2Fragment::OnClickMotorStop}"
             android:text="정지"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorPrimary"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_left" />
@@ -44,9 +59,10 @@
             android:layout_marginTop="64dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="#FFBFBF"
             android:onClick="@{Tab2Fragment::OnClickLeft}"
             android:text="반시계방향"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorPrimary"
             app:layout_constraintEnd_toStartOf="@+id/button_motor_stop"
             app:layout_constraintStart_toEndOf="@+id/button_right"
             app:layout_constraintTop_toBottomOf="@+id/textView_currentMotor" />
@@ -74,18 +90,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_right"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            android:background="#FFBFBF"
-            android:onClick="@{Tab2Fragment::OnClickRight}"
-            android:text="시계방향"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button_left"
-            app:layout_constraintEnd_toStartOf="@+id/button_left"
-            app:layout_constraintStart_toEndOf="@+id/textView5" />
+
 
         <TextView
             android:id="@+id/textView5"
@@ -95,7 +100,9 @@
             android:layout_marginLeft="12dp"
             android:layout_marginEnd="22dp"
             android:layout_marginRight="22dp"
-            android:text="TextView"
+            android:text="동작 제어"
+            android:textColor="#000000"
+            android:textSize="20dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_right"
             app:layout_constraintEnd_toStartOf="@+id/button_right"
             app:layout_constraintStart_toStartOf="parent" />
@@ -107,30 +114,38 @@
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="179dp"
-            android:text="TextView"
+            android:text="회전 속도"
+            android:textColor="#000000"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="68dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/speedup"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@color/colorPrimary"
+            android:onClick="@{Tab2Fragment::OnClickMotorStop}"
+            android:text="빠르게"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@+id/speeddown"
+            app:layout_constraintTop_toBottomOf="@+id/button_right" />
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
-            android:layout_marginLeft="41dp"
-            android:layout_marginBottom="62dp"
-            android:text="Switch"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView8" />
+        <Button
+            android:id="@+id/speeddown"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:background="@color/colorPrimary"
+            android:onClick="@{Tab2Fragment::OnClickMotorStop}"
+            android:text="느리게"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_left" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

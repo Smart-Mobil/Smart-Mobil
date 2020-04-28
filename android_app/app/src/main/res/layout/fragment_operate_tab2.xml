@@ -19,37 +19,39 @@
             android:layout_width="148dp"
             android:layout_height="148dp"
             android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/icmusic" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:onClick="@{Tab2Fragment::OnClickStop}"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginTop="170dp"
-            android:layout_marginBottom="172dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:background="@color/colorPrimary"
+            android:onClick="@{Tab2Fragment::OnClickStop}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/textView_currentMusic"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@android:drawable/ic_media_pause" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:onClick="@{Tab2Fragment::OnClickStart}"
-            android:layout_width="0dp"
+            android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginTop="143dp"
-            android:layout_marginEnd="161dp"
-            android:layout_marginRight="161dp"
+            android:layout_marginBottom="140dp"
+            android:background="@color/colorPrimary"
+            android:onClick="@{Tab2Fragment::OnClickStart}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_select"
-            app:layout_constraintTop_toBottomOf="@+id/textView_currentMusic"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
             app:srcCompat="@android:drawable/ic_media_play" />
 
         <TextView
@@ -67,28 +69,30 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="56dp"
             android:text="현재 재생중인 음악"
-            android:textSize="30dp"
             android:textColor="#000000"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button_select"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginRight="35dp"
-            android:background="#FFBFBF"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:background="@color/colorPrimary"
             android:onClick="@{Tab2Fragment::OnClickSelect}"
             android:text="노래선택"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintHorizontal_bias="0.69"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
