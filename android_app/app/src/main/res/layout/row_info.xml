@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="250dp"
     xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <!-- A CardView that contains a TextView -->
-    <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="17dp"
-        card_view:cardCornerRadius="4dp">
+        android:layout_margin="14dp"
+        card_view:cardCornerRadius="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="#F7FAFF"
             >
 
             <RelativeLayout
@@ -35,16 +34,15 @@
                 <TextView
                     android:id="@+id/TextView_title"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="0dp"
-                    android:background="#4D000000"
+                    android:background="#84412E05"
                     android:gravity="center"
                     android:paddingLeft="6dp"
                     android:paddingRight="6dp"
                     android:text="text"
                     android:textColor="#ffffff"
-                    android:textSize="16sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </RelativeLayout>
 <!--
@@ -57,7 +55,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
                 android:text="text"
-                android:textSize="12sp" />
+                android:textSize="10dp" />
                 -->
         </LinearLayout>
     </androidx.cardview.widget.CardView>

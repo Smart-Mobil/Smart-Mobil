@@ -106,6 +106,7 @@ public class InfoFragment extends Fragment {
 
                     newsData.setTitle(Title_);
                     newsData.setContent(link_);
+                    newsData.setUrlToImage("https://t1.daumcdn.net/cfile/tistory/99B6E6405C00AB432D");
 
                     news.add(newsData);
                 }

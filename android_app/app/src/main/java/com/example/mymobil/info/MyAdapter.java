@@ -79,7 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         //타이틀
         holder.mTextViewTitle.setText(news.getTitle());
 
-        /*
+/*
         //링크
         String content = news.getContent();
         if(news.getContent()!=null && content.length()>0){
@@ -88,11 +88,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         else{
             holder.mTextViewContent.setText(" ");
         }
-
+*/
         //이미지
         Uri uri = Uri.parse(news.getUrlToImage());
         holder.mImageView.setImageURI(uri);
-         */
+
         holder.rootView.setTag(position);
     }
 

@@ -7,8 +7,8 @@
 
     <WebView
         android:id="@+id/webView"
-        android:layout_width="400dp"
-        android:layout_height="263dp"
+        android:layout_width="396dp"
+        android:layout_height="314dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="1dp"
@@ -21,13 +21,15 @@
 
     <Button
         android:id="@+id/button_capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
+        android:layout_width="166dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
         android:layout_marginBottom="144dp"
         android:enabled="false"
+        android:background="@color/colorPrimary"
         android:text="아기 얼굴 캡쳐"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/webView"
         app:layout_constraintTop_toBottomOf="@+id/webView" />
