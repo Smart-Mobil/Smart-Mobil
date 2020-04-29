@@ -70,7 +70,7 @@ Child care information
 ### :pencil2: 시연
 ----------------------------------------------------------
 #### Application
-* App 구성도
+* App type
 <img src="https://user-images.githubusercontent.com/37360089/80593558-68e9d280-8a5c-11ea-86b9-7a3859a4b599.png"/>
 
 #### Arduino
