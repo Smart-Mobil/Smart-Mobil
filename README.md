@@ -2,67 +2,47 @@
 한국산업기술대학교 컴퓨터공학과 졸업작품<br>
 Korea Polytechnic University<br>
 Computer Engineering Senier Project<br>
+(Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
 
 --------------------------------------
 
 ### :book: 프로젝트명 
 #### 원격 제어가 가능한 신생아 건강 스마트 모빌  
-Remotely Controllable Smart Mobil for newborn baby  
-Korea Polytechnic University  
-(Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
 
-### :pencil2: 개요  
+### :pencil2: 목차
 ----------------------------------------------------------
-주변 환경에 민감한 신생아의 건강  
-Health of newborns sensitive to the surrounding environment 
+1. 목적
+2. 기능
+3. 역할
+4. 개발환경
+5. 시연
+6. 참고
 
-동시에 여러가지 환경 데이터를 수집하는데 어려움을 겪는 부모  
-Parents who have difficulty collecting various environmental data at the same time  
-
-신생아와 밀접한 장난감일 모빌을 이용하여 환경 데이터 수집  
-Collect environmental data using mobile, a toy closely related to newborn  
-
-아기얼굴 스트리밍  
-Streaming
-
-애플리케이션 제공
-Provide App
-
-### :pencil2: 목적
+### :pencil2: 1. 목적
 ----------------------------------------------------------
-모빌에 부착된 다양한 모듈을 통해 환경 데이터 수집 및 영상 스트리밍  
-Collect environmental data and stream video through various modules attached to mobiles  
+* 민감한 아기를 위한 실시간 환경 모니터링
+* 애플리케이션을 통하여 육아에 필요한 여러 기능 제공     
 
-애플리케이션과 웹을 통한 쉬운 접근성  
-Application, Web
-
-### :pencil2: 기능 
+### :pencil2: 2. 기능 
 ----------------------------------------------------------
-신생아 모니터링  
-Newborn monitoring  
-환경, 체온 데이터 수집/제공  
-Collect and provide environmental and temperature data  
-원격 동작 제어  
-Remote motion control  
-음악 재생  
-Play music  
-무드등  
-light  
-육아정보  
-Child care information 
-긴급 문자 (문구 + 현재위치)
-SOS
-디데이
-d-day
+* 환경, 체온 데이터 수집/제공 
+* 무드등  
+* 음악 재생
+* 원격 동작 제어(모터)
+* 육아정보    
+* d-day
+* SOS (문구 + 현재위치)
+* 아기 울음 감지
+* 동화책 읽어주기
 
-### :pencil2: 역할
+### :pencil2: 3. 역할
 ----------------------------------------------------------
 * 김진엽 : 안드로이드 애플리케이션 제작, 온습도/미세먼지/비접촉식 모듈
 * 신용원 : UV4L/LED/서보모터/애플리케이션 프론트앤드/프레임제작  
 * 박현욱 : nodeJS 웹서버/웹 프론트앤드/SoC보드 통신/보드-애플리케이션 통신  
 
 
-### :pencil2: 개발환경
+### :pencil2: 4. 개발환경
 ----------------------------------------------------------
 * SoC Board : Arduino Uno / Raspberry Pi 4 B+  
 * Device : Galaxy S10
@@ -73,7 +53,7 @@ d-day
 * Streaming Server : UV4L  
 
 
-### :pencil2: 시연
+### :pencil2: 5. 시연
 ----------------------------------------------------------
 #### Application
 * App 프로토타입
@@ -91,7 +71,7 @@ d-day
 <img src="https://user-images.githubusercontent.com/37360089/76210685-f6bcf480-6247-11ea-82c1-12650695468c.png" width="50%">
 
 
-### :pencil2: 참고
+### :pencil2: 6. 참고
 ----------------------------------------------------------
 #### 사이트
 * 전반적인 웹구축 : http://www.hardcopyworld.com/ngine/aduino/index.php/archives/3343 
