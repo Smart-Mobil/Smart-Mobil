@@ -89,8 +89,6 @@ public class EnvFragment extends Fragment {
                 }
             }.start();
         } else {
-            Toast.makeText(getActivity(), "잘못된 URL 주소입니다. URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
-
             Intent it = new Intent(getActivity(), SettingActivity.class);
             startActivity(it);
 

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mymobil.MainActivity;
 import com.example.mymobil.R;
+import com.example.mymobil.SplashActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -154,7 +155,7 @@ public class LoginGoogleActivity extends AppCompatActivity {
 
             Toast.makeText(LoginGoogleActivity.this,personName + "  " + personEmail,Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
             startActivityForResult(intent,sub);
         }
     }

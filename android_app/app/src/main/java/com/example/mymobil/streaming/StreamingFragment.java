@@ -51,8 +51,6 @@ public class StreamingFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_streaming, container, false);
 
-        grantExternalStoragePermission();
-
         btn_capture = root.findViewById(R.id.button_capture);
 
         if (btn_capture.isEnabled()) {
@@ -142,19 +140,5 @@ public class StreamingFragment extends Fragment {
         }
     }
 
-    private boolean grantExternalStoragePermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
 
-            if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-
-                return false;
-            }
-        } else {
-            Toast.makeText(getActivity(), "External Storage Permission is Grant", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-    }
 }
