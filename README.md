@@ -9,27 +9,32 @@ Computer Engineering Senier Project<br>
 #### 원격 제어가 가능한 신생아 건강 스마트 모빌  
 Remotely Controllable Smart Mobil for newborn baby  
 Korea Polytechnic University  
-Professor 공기석 Student 김진엽 박현욱 신용원  
+(Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
 
 ### :pencil2: 개요  
 ----------------------------------------------------------
 주변 환경에 민감한 신생아의 건강  
-Health of newborns sensitive to the surrounding environment  
+Health of newborns sensitive to the surrounding environment 
+
 동시에 여러가지 환경 데이터를 수집하는데 어려움을 겪는 부모  
 Parents who have difficulty collecting various environmental data at the same time  
+
 신생아와 밀접한 장난감일 모빌을 이용하여 환경 데이터 수집  
 Collect environmental data using mobile, a toy closely related to newborn  
-모빌을 이용한 스트리밍  
-Streaming with Mobile  
-애플리케이션과 웹을 이용한 육아 데이터 및 통계치 제공  
-Providing parenting data and statistics using applications and the web  
+
+아기얼굴 스트리밍  
+Streaming
+
+애플리케이션 제공
+Provide App
 
 ### :pencil2: 목적
 ----------------------------------------------------------
 모빌에 부착된 다양한 모듈을 통해 환경 데이터 수집 및 영상 스트리밍  
 Collect environmental data and stream video through various modules attached to mobiles  
-애플리케이션과 웹을 통해 다양한 환경 데이터 전달, 모빌 원격 제어  
-Various environmental data delivery through mobile and application, mobile remote control  
+
+애플리케이션과 웹을 통한 쉬운 접근성  
+Application, Web
 
 ### :pencil2: 기능 
 ----------------------------------------------------------
@@ -41,17 +46,18 @@ Collect and provide environmental and temperature data
 Remote motion control  
 음악 재생  
 Play music  
-수유등/야간 무드등  
-Feeding light / night mood light  
+무드등  
+light  
 육아정보  
-Child care information  
-(추가 개발 예정)  
-(To be developed further)  
-
+Child care information 
+긴급 문자 (문구 + 현재위치)
+SOS
+디데이
+d-day
 
 ### :pencil2: 역할
 ----------------------------------------------------------
-* 김진엽 : 온습도/미세먼지/비접촉식 모듈, 앱 제작/데이터베이스 구축  
+* 김진엽 : 안드로이드 애플리케이션 제작, 온습도/미세먼지/비접촉식 모듈
 * 신용원 : UV4L/LED/서보모터/애플리케이션 프론트앤드/프레임제작  
 * 박현욱 : nodeJS 웹서버/웹 프론트앤드/SoC보드 통신/보드-애플리케이션 통신  
 
@@ -59,7 +65,7 @@ Child care information
 ### :pencil2: 개발환경
 ----------------------------------------------------------
 * SoC Board : Arduino Uno / Raspberry Pi 4 B+  
-* Device : Galaxy S8  
+* Device : Galaxy S10
 * Module : DHT22 / SG90 / PM2008M / MLX90614  
 * OS : Raspbian  
 * DB : MySQL  
@@ -73,13 +79,14 @@ Child care information
 * App 프로토타입
 <img src="https://user-images.githubusercontent.com/37360089/80593558-68e9d280-8a5c-11ea-86b9-7a3859a4b599.png"/>
 
-#### Arduino
-<img src="https://user-images.githubusercontent.com/37360089/76210683-f58bc780-6247-11ea-8ccc-aaa18010fc40.jpg" width="40%"><img src="https://user-images.githubusercontent.com/37360089/72738200-6a496a80-3be4-11ea-87ab-3dd8c8f5f42d.png" width="60%">
-
-#### RasberryPi
-<img src="https://user-images.githubusercontent.com/37360089/76210681-f3c20400-6247-11ea-8641-bcb040c61425.jpg" width="50%">
+#### Arduino, RasberryPi
+* 회로도
+<img src="https://user-images.githubusercontent.com/37360089/80593982-207ee480-8a5d-11ea-9919-a68cfae01e78.PNG"/>
 
 #### Server
+* node.js
+<img src="https://user-images.githubusercontent.com/37360089/80594451-f8dc4c00-8a5d-11ea-8c42-aceba031186a.png"/>
+
 * UV4L
 <img src="https://user-images.githubusercontent.com/37360089/76210685-f6bcf480-6247-11ea-82c1-12650695468c.png" width="50%">
 
