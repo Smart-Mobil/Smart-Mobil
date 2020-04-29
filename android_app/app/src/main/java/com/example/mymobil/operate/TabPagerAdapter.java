@@ -8,6 +8,9 @@ import com.example.mymobil.operate.moodlight.Tab1Fragment;
 import com.example.mymobil.operate.music.Tab2Fragment;
 import com.example.mymobil.operate.motor.Tab3Fragment;
 
+/**
+ * Create by Jinyeob on 2020. 02.
+ */
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     // Count number of tabs

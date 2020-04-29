@@ -27,6 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+/**
+ * Create by Jinyeob on 2020. 03.
+ */
 public class LoginGoogleActivity extends AppCompatActivity {
     private SignInButton signInButton;
     private GoogleSignInClient googleSignInClient;

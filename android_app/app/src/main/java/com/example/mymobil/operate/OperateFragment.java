@@ -12,6 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mymobil.R;
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * Create by Jinyeob on 2020. 02.
+ */
 public class OperateFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;

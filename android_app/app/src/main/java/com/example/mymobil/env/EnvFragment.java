@@ -30,9 +30,7 @@ import java.util.regex.PatternSyntaxException;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/*
- * Add by Jinyeob
- *
+/**
  * Update by Jinyeob on 2020.04.24
  * Url 셋팅 추가 완료
  * Url 검사하는 코드 추가

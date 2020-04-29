@@ -26,8 +26,8 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 import static android.content.Context.MODE_PRIVATE;
 
-/*
- * Update by Jinyeob on 2020.04.25
+/**
+ * Update by Jinyeob on 2020. 04. 25
  */
 
 public class Tab3Fragment extends Fragment {

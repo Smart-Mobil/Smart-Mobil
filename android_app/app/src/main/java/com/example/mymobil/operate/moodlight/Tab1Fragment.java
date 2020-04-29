@@ -29,8 +29,8 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 import static android.content.Context.MODE_PRIVATE;
-/*
- * Update by Jinyeob on 2020.04.25
+/**
+ * Update by Jinyeob on 2020. 04. 25
  * Url 검사 조건문 추가
  */
 public class Tab1Fragment extends Fragment {

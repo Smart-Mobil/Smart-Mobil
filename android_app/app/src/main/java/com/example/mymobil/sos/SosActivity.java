@@ -34,13 +34,13 @@ import java.util.Locale;
 
 import com.example.mymobil.R;
 import com.example.mymobil.setting.SettingActivity;
-/*
- * Update by Jinyeob on 2020.04.22
+/**
+ * Update by Jinyeob on 2020. 04. 22
  * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
  */
 
-/*
- * Update by Jinyeob on 2020.04.24
+/**
+ * Update by Jinyeob on 2020. 04. 24
  * 전화번호 셋팅 추가 완료
  */
 public class SosActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
@@ -327,8 +327,9 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
             Log.w("MyCurrentloctionaddress", "Canont get Address!");
         }
 
-        // "대한민국 " 글자 지워버림
-        strAdd = strAdd.substring(5);
+        if(strAdd.length()>5) {
+            strAdd = strAdd.replace("대한민국 ","");
+        }
 
         return strAdd;
     }

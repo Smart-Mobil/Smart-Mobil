@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import static android.text.InputType.TYPE_CLASS_NUMBER;
 
-/*
+/**
  * Add by Jinyeob 2020.04.23
  * 셋팅기능
  * 1. 접속 url 설정
@@ -35,7 +35,7 @@ import static android.text.InputType.TYPE_CLASS_NUMBER;
  * 4. 아기 이름, 디데이 날짜 설정
  */
 
-/*
+/**
  * Update by Jinyeob on 2020.04.24
  * onStop 추가
  * 주석 추가

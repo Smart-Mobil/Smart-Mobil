@@ -31,12 +31,12 @@ import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/*
+/**
  * Update by Jinyeob on 2020.04.22
  * Add capture button
  */
 
-/*
+/**
  * Update by Jinyeob on 2020.04.24
  * Url 셋팅 추가 완료
  * Url 검사하는 코드 추가

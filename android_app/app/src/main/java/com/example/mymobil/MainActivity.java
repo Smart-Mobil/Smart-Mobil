@@ -29,6 +29,9 @@ import android.view.Menu;
 
 import java.security.MessageDigest;
 
+/**
+ * Create by Jinyeob on 2020.02.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;

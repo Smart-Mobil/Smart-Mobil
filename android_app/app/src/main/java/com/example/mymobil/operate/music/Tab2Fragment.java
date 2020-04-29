@@ -35,11 +35,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
-//import butterknife.ButterKnife;
-//import butterknife.OnClick;
 
-/*
- * Update by Jinyeob on 2020.04.22
+/**
+ * Update by Jinyeob on 2020. 04. 22
  * Data binding 적용
  */
 

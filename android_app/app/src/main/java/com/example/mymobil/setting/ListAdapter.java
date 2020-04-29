@@ -13,7 +13,7 @@ import com.example.mymobil.R;
 
 import java.util.ArrayList;
 
-/*
+/**
  * Add by Jinyeob on 2020.04.23
  * ListAdapter
  *

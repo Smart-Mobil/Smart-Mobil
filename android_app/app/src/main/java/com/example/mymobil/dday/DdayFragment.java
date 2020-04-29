@@ -29,6 +29,9 @@ import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * Create by Jinyeob on 2020.03.
+ */
 
 public class DdayFragment extends Fragment {
     private ImageView imageView;

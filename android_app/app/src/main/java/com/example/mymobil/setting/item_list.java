@@ -1,5 +1,8 @@
 package com.example.mymobil.setting;
 
+/**
+ * Create by Jinyeob on 2020. 04. 23
+ */
 class item_list {
     private int settingIcon;
     private String settingName;
