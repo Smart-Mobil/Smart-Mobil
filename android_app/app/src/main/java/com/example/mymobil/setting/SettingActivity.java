@@ -85,6 +85,8 @@ public class SettingActivity extends AppCompatActivity {
                         sosDialog();
                         break;
                     case 2:
+                        //문구 입력 다이얼로그
+                        sosMessageDialog();
                         break;
                     default:
                 }
@@ -114,8 +116,8 @@ public class SettingActivity extends AppCompatActivity {
         settingDataList = new ArrayList<item_list>();
 
         settingDataList.add(new item_list(R.drawable.ic_menu_manage, "URL 설정", "접속 URL을 설정합니다."));
-        settingDataList.add(new item_list(R.drawable.ic_menu_manage, "SOS 수신번호 설정", "SOS 송신할 번호를 설정합니다."));
-        //settingDataList.add(new item_list(R.drawable.ic_menu_manage, "아기 정보 설정", "아기 이름과 생일을 입력합니다"));
+        settingDataList.add(new item_list(R.drawable.ic_menu_manage, "SOS 번호 설정", "SOS 전송할 번호를 설정합니다."));
+        settingDataList.add(new item_list(R.drawable.ic_menu_manage, "SOS 문구 설정", "SOS 전송할 문구를 설정합니다."));
     }
 
     /* url 입력 다이얼로그 */
@@ -143,7 +145,7 @@ public class SettingActivity extends AppCompatActivity {
                 settingUrl = et.getText().toString();
                 editor.putString("SAVED_URL", settingUrl);
                 editor.commit();
-                Toast.makeText(getApplicationContext(), "URL 저장 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, "URL 저장 완료", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }
@@ -166,11 +168,12 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ad.setTitle("SOS 설정");
-        ad.setMessage("SOS 송신할 번호를 입력해주세요.");
+        ad.setMessage("SOS 전송할 번호를 입력해주세요.");
 
         final EditText et = new EditText(SettingActivity.this);
         et.setInputType(TYPE_CLASS_NUMBER);
         ad.setView(et);
+        et.setTextColor(Color.parseColor("#000000"));
         et.setText(text);
 
         ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -179,7 +182,44 @@ public class SettingActivity extends AppCompatActivity {
                 settingSms = et.getText().toString();
                 editor.putString("SAVED_SMS", settingSms);
                 editor.commit();
-                Toast.makeText(getApplicationContext(), "번호 저장 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, "문구 저장 완료", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
+            }
+        });
+
+        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        ad.show();
+    }
+
+    public void sosMessageDialog() {
+        AlertDialog.Builder ad = new AlertDialog.Builder(SettingActivity.this);
+
+        String text = sharedPreferences.getString("SAVED_SMS_MESSAGE", "");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        ad.setTitle("SOS 문구 설정");
+        ad.setMessage("SOS 전송할 문구를 입력해주세요.");
+
+        final EditText et = new EditText(SettingActivity.this);
+        et.setInputType(TYPE_CLASS_NUMBER);
+        ad.setView(et);
+        et.setTextColor(Color.parseColor("#000000"));
+        et.setText(text);
+
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                settingSms = et.getText().toString();
+                editor.putString("SAVED_SMS_MESSAGE", settingSms);
+                editor.commit();
+                Toast.makeText(SettingActivity.this, "문구 저장 완료", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
             }

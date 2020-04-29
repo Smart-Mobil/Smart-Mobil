@@ -38,6 +38,12 @@ import com.example.mymobil.setting.SettingActivity;
 /**
  * Update by Jinyeob on 2020. 04. 22
  * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
+ * <p>
+ * Update by Jinyeob on 2020. 04. 24
+ * 전화번호 셋팅 추가 완료
+ * <p>
+ * Update by Jinyeob on 2020. 04. 24
+ * 전화번호 셋팅 추가 완료
  */
 
 /**
@@ -58,13 +64,14 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
-    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     MapPoint.GeoCoordinate mapPointGeo;
     String address;
 
     SharedPreferences sharedPreferences;
-    String phoneNo = " ";
+    String phoneNo = "";
+    String message_ = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +86,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         if (!checkLocationServicesStatus()) {
 
             showDialogForLocationServiceSetting();
-        }else {
+        } else {
 
             checkRunTimePermission();
         }
@@ -91,6 +98,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
 
         sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
         phoneNo = sharedPreferences.getString("SAVED_SMS", "");
+        message_ = sharedPreferences.getString("SAVED_SMS_MESSAGE", "아기가 위험해요!");
 
         mSmsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +114,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
                     }
                     //전송
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, address, null, null);
+                    smsManager.sendTextMessage(phoneNo, null, message_ + " 위치: " + address, null, null);
                     Toast.makeText(getApplicationContext(), "전송 완료", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "전송 실패", Toast.LENGTH_LONG).show();
@@ -214,7 +222,6 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     }
 
 
-
     /*
      * ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드입니다.
      */
@@ -223,7 +230,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
                                            @NonNull String[] permissions,
                                            @NonNull int[] grandResults) {
 
-        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+        if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
 
@@ -240,12 +247,11 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
             }
 
 
-            if ( check_result ) {
+            if (check_result) {
                 Log.d("@@@", "start");
                 //위치 값을 가져올 수 있음
                 mMapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
-            }
-            else {
+            } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
@@ -254,7 +260,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
                     finish();
 
 
-                }else {
+                } else {
 
                     Toast.makeText(SosActivity.this, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show();
 
@@ -264,7 +270,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         }
     }
 
-    void checkRunTimePermission(){
+    void checkRunTimePermission() {
 
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -272,7 +278,7 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
 
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED ) {
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
             // 2. 이미 퍼미션을 가지고 있다면
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
@@ -304,7 +310,6 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
         }
 
     }
-
 
 
     //여기부터는 GPS 활성화를 위한 메소드들
