@@ -70,8 +70,7 @@ Child care information
 ### :pencil2: 시연
 ----------------------------------------------------------
 #### Application
-* adobe tool (https://xd.adobe.com/view/4d7cd635-81fe-4a37-79d2-4c57d108293a-3b4d/)
-
+* App 구성도
 <img src="https://user-images.githubusercontent.com/37360089/80593558-68e9d280-8a5c-11ea-86b9-7a3859a4b599.png"/>
 
 #### Arduino
