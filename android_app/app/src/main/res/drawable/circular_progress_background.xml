@@ -13,9 +13,9 @@
                 android:shape="ring"
                 android:thickness="10dp" >
                 <gradient
-                    android:centerColor="#ffffff"
-                    android:endColor="#ffffff"
-                    android:startColor="#ffffff"
+                    android:centerColor="#CCCCCC"
+                    android:endColor="#CCCCCC"
+                    android:startColor="#CCCCCC"
                     android:type="sweep" />
             </shape>
         </rotate>

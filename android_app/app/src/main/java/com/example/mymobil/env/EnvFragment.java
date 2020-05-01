@@ -32,9 +32,14 @@ import java.util.regex.PatternSyntaxException;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Update by Jinyeob on 2020.04.24
+ * Update by Jinyeob on 2020. 04. 24.
  * Url 셋팅 추가 완료
  * Url 검사하는 코드 추가
+ */
+
+/**
+ * Update by Jinyeob on 2020. 05. 01.
+ * 원형 프로그레스바 업데이트
  */
 public class EnvFragment extends Fragment {
     private TextView textView;
@@ -50,6 +55,9 @@ public class EnvFragment extends Fragment {
     private ProgressBar progressBar_temp;
     private ProgressBar progressBar_hum;
 
+    private TextView textView_dust;
+    private TextView textView_temp;
+    private TextView textView_hum;
 
     //Bundle extra;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -83,9 +91,14 @@ public class EnvFragment extends Fragment {
         }
 
         textView = root.findViewById(R.id.text_env);
-        progressBar_dust = (ProgressBar)root.findViewById(R.id.cpb1);
-        progressBar_temp = (ProgressBar)root.findViewById(R.id.cpb2);
-        progressBar_hum = (ProgressBar)root.findViewById(R.id.cpb3);
+        textView_dust = root.findViewById(R.id.text_dust_percentage);
+        textView_temp = root.findViewById(R.id.text_temp_percentage);
+        textView_hum = root.findViewById(R.id.text_hum_percentage);
+
+
+        progressBar_dust = (ProgressBar) root.findViewById(R.id.cpb1);
+        progressBar_temp = (ProgressBar) root.findViewById(R.id.cpb2);
+        progressBar_hum = (ProgressBar) root.findViewById(R.id.cpb3);
 
         progressBar_dust.setProgress(20);
         progressBar_temp.setProgress(25);
@@ -97,7 +110,7 @@ public class EnvFragment extends Fragment {
                 public void run() {
                     while (true) {
                         try {
-                            Thread.sleep(3000); //1초 주기로 파싱
+                            Thread.sleep(3000); //3초 주기로 파싱
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -133,7 +146,7 @@ public class EnvFragment extends Fragment {
 
 
             if (0 < idx && idx + 1 < dustString.indexOf("/")) {
-                dust_= Integer.parseInt(dustString.substring(idx + 1, dustString.indexOf("/")));
+                dust_ = Integer.parseInt(dustString.substring(idx + 1, dustString.indexOf("/")));
                 dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
                 dustString2 = "PM2.5 : " + dust_ + "\n\n";
 
@@ -156,8 +169,8 @@ public class EnvFragment extends Fragment {
             int idx2 = THString.indexOf(",");
 
             if (0 < idx2 && idx2 + 1 < THString.indexOf("/")) {
-                temp_= Integer.parseInt(THString.substring(0, idx2));
-                hum_=Integer.parseInt(THString.substring(idx2 + 1, THString.indexOf("/")));
+                temp_ = Integer.parseInt(THString.substring(0, idx2));
+                hum_ = Integer.parseInt(THString.substring(idx2 + 1, THString.indexOf("/")));
 
                 tempString = "<온습도>\n온도 : " + temp_ + "\n";
                 humString = "습도 : " + hum_ + "\n\n";
@@ -176,7 +189,7 @@ public class EnvFragment extends Fragment {
         if (bodyTempString.length() > 0) {
             bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
             if (0 < bodyTempString.indexOf("/")) {
-                tempBody_=Integer.parseInt(bodyTempString.substring(0, bodyTempString.indexOf("/")));
+                tempBody_ = Integer.parseInt(bodyTempString.substring(0, bodyTempString.indexOf("/")));
                 bodyTempString = "체온 : " + tempBody_ + "\n\n";
 
                 return bodyTempString;
@@ -224,7 +237,15 @@ public class EnvFragment extends Fragment {
             if (allString.equals("") || allString.equals(" ") || allString.equals("   ")) {
                 textView.setText("Connection Fail!! 연결 확인해주세요.");
             } else {
-                textView.setText(allString);
+                progressBar_dust.setProgress(dust_);
+                progressBar_temp.setProgress(temp_);
+                progressBar_hum.setProgress(hum_);
+
+                textView_dust.setText(dust_);
+                textView_temp.setText(temp_+" 'C");
+                textView_hum.setText(hum_+" %");
+
+                textView.setText("");
             }
         }
     };

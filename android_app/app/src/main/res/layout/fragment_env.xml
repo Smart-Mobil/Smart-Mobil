@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/textColor"
         android:textSize="30dp" />
 
     <LinearLayout
@@ -31,13 +31,14 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textColor"
             android:textSize="30dp"
             android:text="미세먼지"/>
         <RelativeLayout
             android:id="@+id/relativeLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:padding="15dp">
 
             <ProgressBar
@@ -57,6 +58,19 @@
                 android:layout_centerInParent="true"
                 android:indeterminate="false"
                 android:progressDrawable="@drawable/circular_progress_foreground" />
+
+            <TextView
+                android:id="@+id/text_dust_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="20"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:textColor="@color/textColor"
+                android:textSize="30dp" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -73,13 +87,14 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textColor"
             android:textSize="30dp"
             android:text="온도"/>
         <RelativeLayout
             android:id="@+id/relativeLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:padding="15dp">
 
             <ProgressBar
@@ -100,6 +115,19 @@
                 android:layout_centerInParent="true"
                 android:indeterminate="false"
                 android:progressDrawable="@drawable/circular_progress_foreground" />
+
+            <TextView
+                android:id="@+id/text_temp_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="27 'C"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:textColor="@color/textColor"
+                android:textSize="30dp" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -115,14 +143,14 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textColor"
             android:textSize="30dp"
             android:text="습도"/>
         <RelativeLayout
             android:id="@+id/relativeLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
             android:padding="15dp">
 
             <ProgressBar
@@ -144,6 +172,19 @@
                 android:indeterminate="false"
                 android:max="50"
                 android:progressDrawable="@drawable/circular_progress_foreground" />
+
+            <TextView
+                android:id="@+id/text_hum_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="30 %"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:textColor="@color/textColor"
+                android:textSize="30dp" />
         </RelativeLayout>
     </LinearLayout>
 
