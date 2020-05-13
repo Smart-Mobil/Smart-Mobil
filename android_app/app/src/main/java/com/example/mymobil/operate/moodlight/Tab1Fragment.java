@@ -1,5 +1,6 @@
 package com.example.mymobil.operate.moodlight;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,12 +30,15 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Update by Jinyeob on 2020. 04. 25
  * Url 검사 조건문 추가
  */
 public class Tab1Fragment extends Fragment {
     private String moodlightUrl = "";
+    private int color;
+    TextView textView;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,52 +64,58 @@ public class Tab1Fragment extends Fragment {
             getActivity().finish();
         }
 
-        final Button btnOn = root.findViewById(R.id.btnSend);
+        //final Button btnOn = root.findViewById(R.id.btnSend);
         final Button btnOff = root.findViewById(R.id.btnSend2);
+        textView = root.findViewById(R.id.brightnessText);
+        ColorPickerView colorPickerView = root.findViewById(R.id.colorPickerView);
 
         if (URLUtil.isValidUrl(moodlightUrl)) {
-
+/*
             btnOn.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
                 public void onClick(View v) {
                     //On 일때
+                    textView.setText("ON 상태");
+                    btnOn.setEnabled(false);
+                    btnOff.setEnabled(true);
+
                     new Thread() {
                         public void run() {
                             postInfo("on");
-                            // Message msg = handler.obtainMessage();
-                            // handler.sendMessage(msg);
                         }
                     }.start();
-                    btnOn.setEnabled(false);
-                    btnOff.setEnabled(true);
+
                 }
             });
-
+*/
             btnOff.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
                 public void onClick(View v) {
                     //Off 일때
+                    textView.setText("OFF 상태");
+                    btnOff.setEnabled(false);
+                    //btnOn.setEnabled(true);
+
                     new Thread() {
                         public void run() {
                             postInfo("off");
-                            // Message msg = handler.obtainMessage();
-                            //  handler.sendMessage(msg);
                         }
                     }.start();
-                    btnOff.setEnabled(false);
-                    btnOn.setEnabled(true);
+
                 }
             });
 
-            ColorPickerView colorPickerView = root.findViewById(R.id.colorPickerView);
             colorPickerView.setColorListener(new ColorEnvelopeListener() {
                 @Override
                 public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                    final int color = envelope.getColor();
+                    color = envelope.getColor();
+                    textView.setText(String.valueOf(color));
+                    btnOff.setEnabled(true);
+
                     //컬러 보내기
                     new Thread() {
                         public void run() {
                             postInfo(String.valueOf(color));
-                            // Message msg = handler.obtainMessage();
-                            //  handler.sendMessage(msg);
                         }
                     }.start();
                 }
@@ -135,10 +145,5 @@ public class Tab1Fragment extends Fragment {
             e.printStackTrace();
         }
     }
-/*
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-        }
-    };
-    */
+
 }

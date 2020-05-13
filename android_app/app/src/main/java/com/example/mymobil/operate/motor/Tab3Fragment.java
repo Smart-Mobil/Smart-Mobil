@@ -68,7 +68,7 @@ public class Tab3Fragment extends Fragment {
     public void OnClickRight(View view) {
         new Thread() {
             public void run() {
-                postInfo("right" + motorNum);
+                postInfo("right");
             }
         }.start();
         Toast.makeText(getActivity(), "시계방향", Toast.LENGTH_SHORT).show();
@@ -92,7 +92,7 @@ public class Tab3Fragment extends Fragment {
     public void OnClickMotorStop(View view) {
         new Thread() {
             public void run() {
-                postInfo("motorStop");
+                postInfo("motoroff");
             }
         }.start();
         Toast.makeText(getActivity(), "정지", Toast.LENGTH_SHORT).show();

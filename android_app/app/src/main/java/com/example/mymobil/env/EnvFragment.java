@@ -45,10 +45,10 @@ public class EnvFragment extends Fragment {
     private TextView textView;
     private String EnvUrl = "";
 
-    int dust_;
-    int temp_;
-    int hum_;
-    int tempBody_;
+    String dust_ = "";
+    String temp_ = "";
+    String hum_ = "";
+    String tempBody_ = "";
 
     private String allString = "";
     private ProgressBar progressBar_dust;
@@ -58,6 +58,7 @@ public class EnvFragment extends Fragment {
     private TextView textView_dust;
     private TextView textView_temp;
     private TextView textView_hum;
+    private TextView textView_body;
 
     //Bundle extra;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -94,7 +95,7 @@ public class EnvFragment extends Fragment {
         textView_dust = root.findViewById(R.id.text_dust_percentage);
         textView_temp = root.findViewById(R.id.text_temp_percentage);
         textView_hum = root.findViewById(R.id.text_hum_percentage);
-
+        textView_body = root.findViewById(R.id.text_body);
 
         progressBar_dust = (ProgressBar) root.findViewById(R.id.cpb1);
         progressBar_temp = (ProgressBar) root.findViewById(R.id.cpb2);
@@ -146,7 +147,7 @@ public class EnvFragment extends Fragment {
 
 
             if (0 < idx && idx + 1 < dustString.indexOf("/")) {
-                dust_ = Integer.parseInt(dustString.substring(idx + 1, dustString.indexOf("/")));
+                dust_ = dustString.substring(idx + 1, dustString.indexOf("/"));
                 dustString1 = "<미세먼지>\nPM10 : " + dustString.substring(0, idx) + "\n";
                 dustString2 = "PM2.5 : " + dust_ + "\n\n";
 
@@ -169,8 +170,8 @@ public class EnvFragment extends Fragment {
             int idx2 = THString.indexOf(",");
 
             if (0 < idx2 && idx2 + 1 < THString.indexOf("/")) {
-                temp_ = Integer.parseInt(THString.substring(0, idx2));
-                hum_ = Integer.parseInt(THString.substring(idx2 + 1, THString.indexOf("/")));
+                temp_ = THString.substring(0, idx2);
+                hum_ = THString.substring(idx2 + 1, THString.indexOf("/"));
 
                 tempString = "<온습도>\n온도 : " + temp_ + "\n";
                 humString = "습도 : " + hum_ + "\n\n";
@@ -189,7 +190,7 @@ public class EnvFragment extends Fragment {
         if (bodyTempString.length() > 0) {
             bodyTempString = bodyTempString.substring(bodyTempString.lastIndexOf(")") + 1);
             if (0 < bodyTempString.indexOf("/")) {
-                tempBody_ = Integer.parseInt(bodyTempString.substring(0, bodyTempString.indexOf("/")));
+                tempBody_ = bodyTempString.substring(0, bodyTempString.indexOf("/"));
                 bodyTempString = "체온 : " + tempBody_ + "\n\n";
 
                 return bodyTempString;
@@ -237,13 +238,25 @@ public class EnvFragment extends Fragment {
             if (allString.equals("") || allString.equals(" ") || allString.equals("   ")) {
                 textView.setText("Connection Fail!! 연결 확인해주세요.");
             } else {
-                progressBar_dust.setProgress(dust_);
-                progressBar_temp.setProgress(temp_);
-                progressBar_hum.setProgress(hum_);
+                textView.setText("연결됨");
+
+                System.out.println(dust_);
+                System.out.println(temp_);
+                System.out.println(hum_);
+
+                int dust = Integer.parseInt(dust_);
+                int temp = Integer.parseInt(temp_.substring(0, temp_.indexOf(".")));
+                int hum = Integer.parseInt(hum_.substring(0, hum_.indexOf(".")));
+                int tempBody = Integer.parseInt(tempBody_.substring(0, tempBody_.indexOf(".")))+2;
+
+                progressBar_dust.setProgress(dust);
+                progressBar_temp.setProgress(temp);
+                progressBar_hum.setProgress(hum);
 
                 textView_dust.setText(dust_);
-                textView_temp.setText(temp_+" 'C");
-                textView_hum.setText(hum_+" %");
+                textView_temp.setText(temp_);
+                textView_hum.setText(hum_);
+                textView_body.setText(String.valueOf(tempBody)+"*C");
 
                 textView.setText("");
             }

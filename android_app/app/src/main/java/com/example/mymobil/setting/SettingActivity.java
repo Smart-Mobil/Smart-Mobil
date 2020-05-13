@@ -208,7 +208,6 @@ public class SettingActivity extends AppCompatActivity {
         ad.setMessage("SOS 전송할 문구를 입력해주세요.");
 
         final EditText et = new EditText(SettingActivity.this);
-        et.setInputType(TYPE_CLASS_NUMBER);
         ad.setView(et);
         et.setTextColor(Color.parseColor("#000000"));
         et.setText(text);
