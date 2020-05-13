@@ -45,6 +45,7 @@ var val; // 임시로 센서값을 저장할 변수
 serialPort.open(function () { //시리얼포트 열기
     serialPort.on('data',function(data){ //시리얼데이터 송신
     val += data;   // 변수에 데이터를 저장하며
+    
     if(val.length >= 1000000){ // 특정 길이 이상이 되면 val 값을 줄여서 해결
       val = val.substring(1,200);  
     }
@@ -109,6 +110,8 @@ app.post("/data", function(req, res){
   console.log(recvData);
   funcjs.onLed(recvData);
   audio = funcjs.onSpeaker(recvData,audio);
+  funcjs.onMotor(recvData,audio);
+
   res.render('finish', { title: './view_file/finish'});
 });
 
@@ -139,7 +142,7 @@ app.get("/hello", (req, res) => {
     if( h1 && h2 && h3)
       break;
   }
-    console.log(h1 +'@'+ h2+ '@'+ h3+'@');
+    //console.log(h1 +'@'+ h2+ '@'+ h3+'@');
     var d = new Date();
     res.render('hello', { title: './view_file/Hello',message1: h1, message2: h2, message3 : h3, message4: d  })
 })

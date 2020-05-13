@@ -11,6 +11,12 @@ ledRed.digitalWrite(1); // Turn RED LED off
 ledGreen.digitalWrite(1); // Turn GREEN LED off
 ledBlue.digitalWrite(1); // Turn BLUE LED off
 
+// 
+const motor_onoff = new Gpio(18, {mode: Gpio.OUTPUT});
+const motor_left = new Gpio(19, {mode: Gpio.OUTPUT});
+const motor_right = new Gpio(26, {mode: Gpio.OUTPUT});
+
+
 // 스피커기능
 var player = require('play-sound')(opts = {})
 
@@ -50,6 +56,7 @@ var audio
 exports.onSpeaker = function main2 (argument1,audio){
 
   if( argument1 === 'stop'){ //스피커 OFF
+
     audio.kill()
   }
   else if( argument1 === 'start1'){
@@ -77,41 +84,92 @@ exports.onSpeaker = function main2 (argument1,audio){
     audio = player.play('./sound_file/d.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start5'){
     audio = player.play('./sound_file/e.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start6'){
     audio = player.play('./sound_file/f.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start7'){
     audio = player.play('./sound_file/g.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start8'){
     audio = player.play('./sound_file/h.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start9'){
     audio = player.play('./sound_file/i.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
 
   else if( argument1 === 'start10'){
     audio = player.play('./sound_file/j.mp3', function(err){
       if (err) throw err
     })
+    return audio
   }
+}
+
+
+
+
+
+
+
+exports.onMotor = function main3 (argument1, audio){
+  if( argument1 === 'motor off'){ //모터 OFF
+    motor_onoff.pwmWrite(0);
+    motor_right.pwmWrite(0);
+    motor_left.pwmWrite(0);
+    if(audio != null)
+      audio.kill()
+  }
+  else if( argument1 === 'motor right'){
+    motor_onoff.pwmWrite(255);
+    motor_right.pwmWrite(255);
+    motor_left.pwmWrite(0);
+
+    if(audio != null){
+      audio.kill()
+    }
+    audio = player.play('./sound_file/i.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+    
+  }
+  else if( argument1 === 'motor left'){
+    motor_onoff.pwmWrite(255);
+    motor_right.pwmWrite(0);
+    motor_left.pwmWrite(255);
+
+    if(audio != null){
+      audio.kill()
+    }
+    audio = player.play('./sound_file/h.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+  }
+
 }
