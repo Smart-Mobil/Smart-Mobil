@@ -31,6 +31,7 @@ import java.security.MessageDigest;
 
 /**
  * Create by Jinyeob on 2020.02.
+ * 브랜치생성 테스트
  */
 public class MainActivity extends AppCompatActivity {
 
