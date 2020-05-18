@@ -3,7 +3,7 @@
 Korea Polytechnic University<br>
 Computer Engineering Senier Project<br>
 (Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
-
+https://youtu.be/NGTB0ODe2eY
 --------------------------------------
 
 ### :bulb: 프로젝트명 
