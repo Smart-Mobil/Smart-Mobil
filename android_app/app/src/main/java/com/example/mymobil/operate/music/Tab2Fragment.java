@@ -147,17 +147,11 @@ public class Tab2Fragment extends Fragment {
     public void OnClickStart(View view) {
         new Thread() {
             public void run() {
-                postInfo("stop");
-            }
-        }.start();
-        new Thread() {
-            public void run() {
                 postInfo("start" + musicNum);
             }
         }.start();
         Toast.makeText(getActivity(), "재생", Toast.LENGTH_SHORT).show();
-
-        handler.sendMessage(handler.obtainMessage());
+        binding.textViewCurrentMusic.setText(currentMusic);
     }
 
     public void OnClickStop(View view) {
@@ -167,9 +161,7 @@ public class Tab2Fragment extends Fragment {
             }
         }.start();
         Toast.makeText(getActivity(), "정지", Toast.LENGTH_SHORT).show();
-
-        currentMusic="정지";
-        handler.sendMessage(handler.obtainMessage());
+        binding.textViewCurrentMusic.setText("정지");
     }
 
     private void postInfo(String value) {
@@ -185,12 +177,4 @@ public class Tab2Fragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
-        /* UI 업데이트는 여기서 합니다^^ */
-        public void handleMessage(Message msg) {
-            binding.textViewCurrentMusic.setText(currentMusic);
-        }
-    };
 }

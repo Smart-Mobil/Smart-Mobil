@@ -66,17 +66,6 @@ public class EnvFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_env, container, false);
 
-        /*
-        //SettingActivity가 쏜 작은 url........ ^^
-        if(extra != null) {
-            extra = this.getArguments();
-            extra = getArguments();
-            EnvUrl= extra.getString("settingUrl");
-
-            Toast.makeText(getActivity(),EnvUrl,Toast.LENGTH_SHORT).show();
-        }
-        */
-
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared", MODE_PRIVATE);
         EnvUrl = sharedPreferences.getString("SAVED_URL", "");
         EnvUrl = EnvUrl.concat(":3000");
@@ -130,12 +119,6 @@ public class EnvFragment extends Fragment {
         return root;
     }
 
-    /*
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-*/
     private String getDust(String dustString) {
         //미세먼지
         String dustString1 = "", dustString2 = ""; //substr용 임시 변수
@@ -238,7 +221,7 @@ public class EnvFragment extends Fragment {
             if (allString.equals("") || allString.equals(" ") || allString.equals("   ")) {
                 textView.setText("Connection Fail!! 연결 확인해주세요.");
             } else {
-                textView.setText("연결됨");
+                textView.setText("");
 
                 System.out.println(dust_);
                 System.out.println(temp_);
@@ -257,10 +240,7 @@ public class EnvFragment extends Fragment {
                 textView_temp.setText(temp_);
                 textView_hum.setText(hum_);
                 textView_body.setText(String.valueOf(tempBody)+"*C");
-
-                textView.setText("");
             }
         }
     };
-
 }

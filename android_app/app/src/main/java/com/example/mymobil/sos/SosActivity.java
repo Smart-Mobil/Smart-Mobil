@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -35,6 +36,7 @@ import java.util.Locale;
 
 import com.example.mymobil.R;
 import com.example.mymobil.setting.SettingActivity;
+import com.example.mymobil.databinding.ActivitySosBinding;
 /**
  * Update by Jinyeob on 2020. 04. 22
  * To Be : 전화번호 입력하는 셋팅 추가하자. (현재는 내번호)
@@ -56,11 +58,16 @@ import com.example.mymobil.setting.SettingActivity;
  * 권한 설정 splash Activity로 전부 이동
  * 오류 해결
  */
+
+/**
+ * Update by Jinyeob on 2020. 05. 14.
+ * 데이터바인딩으로 수정
+ */
 public class SosActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
+    private ActivitySosBinding sosBinding;
+
     private static final String LOG_TAG = "SosActivity";
     private MapView mMapView;
-    private TextView mtextView1, mtextView2, mtextView3;
-    private Button mSmsButton, mKakaoButton;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -76,7 +83,8 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sos);
+        sosBinding = DataBindingUtil.setContentView(this, R.layout.activity_sos);
+        sosBinding.setActivitySos(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로가기
 
@@ -91,38 +99,30 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
             checkRunTimePermission();
         }
 
-        mtextView1 = findViewById(R.id.textView1);
-        mtextView2 = findViewById(R.id.textView2);
-        mtextView3 = findViewById(R.id.textView_address);
-        mSmsButton = findViewById(R.id.button_sms);
-
         sharedPreferences = getSharedPreferences("shared", MODE_PRIVATE);
         phoneNo = sharedPreferences.getString("SAVED_SMS", "");
         message_ = sharedPreferences.getString("SAVED_SMS_MESSAGE", "아기가 위험해요!");
 
-        mSmsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (Integer.parseInt(phoneNo) < 11) {
-                        Toast.makeText(getApplicationContext(), "SOS 송신할 전화번호를 다시 입력해주세요.", Toast.LENGTH_LONG).show();
+    }
 
-                        Intent it = new Intent(getApplicationContext(), SettingActivity.class);
-                        startActivity(it);
+    public void OnClickSms(View view){
+        try {
+            if (Integer.parseInt(phoneNo) < 11) {
+                Toast.makeText(getApplicationContext(), "SOS 송신할 전화번호를 다시 입력해주세요.", Toast.LENGTH_LONG).show();
 
-                        finish();
-                    }
-                    //전송
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, message_ + " 위치: " + address, null, null);
-                    Toast.makeText(getApplicationContext(), "전송 완료", Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "전송 실패", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+                Intent it = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(it);
+
+                finish();
             }
-        });
-
+            //전송
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, message_ + " 위치: " + address, null, null);
+            Toast.makeText(getApplicationContext(), "전송 완료", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "전송 실패", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -152,13 +152,14 @@ public class SosActivity extends AppCompatActivity implements MapView.CurrentLoc
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
         mapPointGeo = currentLocation.getMapPointGeoCoord();
 
-        mtextView1.setText(String.valueOf(mapPointGeo.latitude)); //위도
-        mtextView2.setText(String.valueOf(mapPointGeo.longitude)); //경도
+        sosBinding.textView1.setText(String.valueOf(mapPointGeo.latitude));//위도
+        sosBinding.textView2.setText(String.valueOf(mapPointGeo.longitude));//경도
 
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
 
-        mtextView3.setText(address); // 위치 텍스트 업데이트
-        mSmsButton.setEnabled(true); // 위치 업데이트 후에 버튼 활성화
+        sosBinding.textViewAddress.setText(address);//주소
+
+        sosBinding.buttonSms.setEnabled(true);// 위치 업데이트 후에 버튼 활성화
 
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
     }

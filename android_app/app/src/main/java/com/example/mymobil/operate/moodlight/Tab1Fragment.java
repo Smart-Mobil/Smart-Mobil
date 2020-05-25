@@ -64,37 +64,18 @@ public class Tab1Fragment extends Fragment {
             getActivity().finish();
         }
 
-        //final Button btnOn = root.findViewById(R.id.btnSend);
         final Button btnOff = root.findViewById(R.id.btnSend2);
         textView = root.findViewById(R.id.brightnessText);
         ColorPickerView colorPickerView = root.findViewById(R.id.colorPickerView);
 
         if (URLUtil.isValidUrl(moodlightUrl)) {
-/*
-            btnOn.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("SetTextI18n")
-                public void onClick(View v) {
-                    //On 일때
-                    textView.setText("ON 상태");
-                    btnOn.setEnabled(false);
-                    btnOff.setEnabled(true);
 
-                    new Thread() {
-                        public void run() {
-                            postInfo("on");
-                        }
-                    }.start();
-
-                }
-            });
-*/
             btnOff.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("SetTextI18n")
                 public void onClick(View v) {
                     //Off 일때
                     textView.setText("OFF 상태");
                     btnOff.setEnabled(false);
-                    //btnOn.setEnabled(true);
 
                     new Thread() {
                         public void run() {
@@ -120,6 +101,7 @@ public class Tab1Fragment extends Fragment {
                     }.start();
                 }
             });
+
         } else {
             Toast.makeText(getActivity(), "잘못된 URL 주소입니다. URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
 

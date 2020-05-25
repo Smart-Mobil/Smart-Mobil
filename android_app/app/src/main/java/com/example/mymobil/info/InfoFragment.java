@@ -99,8 +99,8 @@ public class InfoFragment extends Fragment {
 
                     Title_=Title_.replace("[연합뉴스]","");
 
-                    System.out.println("@@@@@@@@@@@@@타이틀::: @@@@@@@@@@@@" + Title_);
-                    System.out.println("#############링크::: #############" + link_);
+                    //System.out.println("@@@@@@@@@@@@@타이틀::: @@@@@@@@@@@@" + Title_);
+                    //System.out.println("#############링크::: #############" + link_);
 
                     NewsData newsData = new NewsData();
 
