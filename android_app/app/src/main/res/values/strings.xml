@@ -13,5 +13,10 @@
     <string name="menu_streaming">실시간 아기 영상</string>
     <string name="menu_info">육아정보</string>
     <string name="menu_dday">디데이</string>
+    <string name="menu_record">동화책 읽어주기</string>
+
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+
 
 </resources>
