@@ -33,7 +33,6 @@ https://youtu.be/NGTB0ODe2eY
 * 육아정보    
 * d-day
 * SOS (문구 + 현재위치)
-* 아기 울음 감지
 * 동화책 읽어주기
 
 ### :pencil2: 3. 역할
@@ -46,13 +45,13 @@ https://youtu.be/NGTB0ODe2eY
 ### :pencil2: 4. 개발환경
 ----------------------------------------------------------
 * SoC Board : Arduino Uno / Raspberry Pi 4 B+  
-* Device : Galaxy S10
+* Device : Galaxy S10, LG q9
 * Module : DHT22 / SG90 / PM2008M / MLX90614  
 * OS : Raspbian  
 * DB : MySQL  
-* Server : nodeJS  
+* Main Server : nodeJS  
 * Streaming Server : UV4L  
-
+* Develop Env : MacOS, Windows10
 
 ### :pencil2: 5. 시연
 ----------------------------------------------------------
