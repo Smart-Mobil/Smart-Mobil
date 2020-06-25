@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -57,6 +61,9 @@ public class UploadActivity extends Fragment {
     int playbackPosition = 0;
     @SuppressLint("SdCardPath")
     String RECORDED_FILE = "/sdcard/mobilrecord/";
+
+    ArrayList<item_list> recordDataList;
+    private File file;
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -197,6 +204,36 @@ public class UploadActivity extends Fragment {
                     playbackPosition = player.getCurrentPosition();
                     player.pause();
                     Toast.makeText(getActivity(), "음악 파일 재생 중지됨.", 2000).show();
+                }
+            }
+        });
+
+        /*
+        리스트뷰 설정
+        */
+        this.InitializesettingData();
+
+        ListView listView = (ListView) root.findViewById(R.id.listView_record);
+        final ListAdapter myAdapter = new ListAdapter(getActivity(), recordDataList);
+
+        listView.setAdapter(myAdapter);
+
+        //리스트뷰 이벤트리스너
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                //터치한 목록 이름 토스트 ㅎ
+                Toast.makeText(getActivity(), myAdapter.getItem(position).getRecordName(), Toast.LENGTH_SHORT).show();
+
+                //리스트뷰 목록에 따라 조건문 실행
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    default:
                 }
             }
         });
@@ -393,5 +430,20 @@ public class UploadActivity extends Fragment {
 
     }
 
+    /* 리스트뷰 목록 추가시 여기에 */
+    public void InitializesettingData() {
+        recordDataList = new ArrayList<item_list>();
 
+        String rootSD = Environment.getExternalStorageDirectory().toString();
+        file = new File( rootSD + "/mobilrecord" ) ;
+        File list[] = file.listFiles();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Log.d("TAG", "파일 수정일시 : " + simpleDateFormat.format(file.lastModified()));
+
+        for( int i=0; i<list.length; i++)
+        {
+            recordDataList.add(new item_list(list[i].getName(),simpleDateFormat.format(list[i].lastModified())));
+        }
+    }
 }
