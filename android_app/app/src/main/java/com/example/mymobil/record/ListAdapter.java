@@ -16,7 +16,6 @@ import java.util.ArrayList;
 /**
  * Add by Jinyeob on 2020. 06. 25.
  * ListAdapter
- *
  */
 
 public class ListAdapter extends BaseAdapter {
@@ -48,14 +47,16 @@ public class ListAdapter extends BaseAdapter {
     @SuppressLint({"ViewHolder", "InflateParams"})
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View view = mLayoutInflater.inflate(R.layout.record_item, null);
+        View view=convertView;
+        if(view==null) {
+            view = mLayoutInflater.inflate(R.layout.record_item, null);
 
-        TextView recordName = (TextView) view.findViewById(R.id.text_record);
-        TextView recordDate = (TextView) view.findViewById(R.id.text_record_date);
+            TextView recordName = (TextView) view.findViewById(R.id.text_record);
+            TextView recordDate = (TextView) view.findViewById(R.id.text_record_date);
 
-        recordName.setText(array_item_list.get(position).getRecordName());
-        recordDate.setText(array_item_list.get(position).getRecordDate());
-
+            recordName.setText(array_item_list.get(position).getRecordName());
+            recordDate.setText(array_item_list.get(position).getRecordDate());
+        }
         return view;
     }
 

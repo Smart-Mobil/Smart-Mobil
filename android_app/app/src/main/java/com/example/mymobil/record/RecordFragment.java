@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +24,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mymobil.MainActivity;
 import com.example.mymobil.R;
+import com.example.mymobil.setting.SettingActivity;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -53,6 +61,7 @@ public class RecordFragment extends Fragment {
     int serverResponseCode = 0;
     ProgressDialog dialog = null;
     String upLoadServerUri = "http://172.20.10.11:3000/api/photo";
+    String upLoadServerUriPost = "http://172.20.10.11";
 
 
     MediaPlayer player;
@@ -65,14 +74,17 @@ public class RecordFragment extends Fragment {
     ArrayList<item_list> recordDataList;
     private File file;
 
+    ListAdapter myAdapter;
+
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.activity_upload, container, false);
 
-        uploadButton = (Button) root.findViewById(R.id.uploadButton);
+        //uploadButton = (Button) root.findViewById(R.id.uploadButton);
         messageText = (TextView) root.findViewById(R.id.messageText);
+        TextView current_record_textView = root.findViewById(R.id.current_record);
 
         //폴더 생성. 있으면 넘어감
         String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -84,40 +96,48 @@ public class RecordFragment extends Fragment {
         SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("shared", MODE_PRIVATE);
         upLoadServerUri = sharedPreferences.getString("SAVED_URL", "");
         assert upLoadServerUri != null;
+        upLoadServerUriPost = upLoadServerUri.concat(":3000/data"); //post용
         upLoadServerUri = upLoadServerUri.concat(":3000/api/photo"); //업로드 포트 붙이기
 
+        /* 올바른 URL인지 검사한다. */
+        if (upLoadServerUri.equals("") || !URLUtil.isValidUrl(upLoadServerUri)) {
+            Toast.makeText(getActivity(), "URL 주소를 입력해주세요.", Toast.LENGTH_LONG).show();
+
+            Intent it = new Intent(getActivity(), SettingActivity.class);
+            startActivity(it);
+
+            getActivity().finish();
+        }
+
+        /*
         //업로드 버튼 클릭이벤트
         uploadButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                dialog = ProgressDialog.show(getActivity(), "", "Uploading file...", true);
-
-                new Thread(new Runnable() {
-                    public void run() {
-                        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
-                            public void run() {
-                                messageText.setText("uploading started.....");
-                            }
-                        });
-
-                        uploadFile(uploadFilePath + "" + uploadFileName);
-
-                    }
-                }).start();
+                uploadEvent();
             }
         });
+
+         */
 
         //재생
         Button recordBtn = (Button) root.findViewById(R.id.recordBtn);
         Button recordStopBtn = (Button) root.findViewById(R.id.recordStopBtn);
-        Button playBtn = (Button) root.findViewById(R.id.playBtn);
-        Button playStopBtn = (Button) root.findViewById(R.id.playStopBtn);
+        //Button playBtn = (Button) root.findViewById(R.id.playBtn);
+        //Button playStopBtn = (Button) root.findViewById(R.id.playStopBtn);
+
+        recordBtn.setEnabled(true);
+        recordStopBtn.setEnabled(false);
 
         recordBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                recordBtn.setEnabled(false);
+                recordStopBtn.setEnabled(true);
 
+                current_record_textView.setText("-------------- 녹음 중 ------------");
                 //파일 이름 입력하는 다이얼로그
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -128,8 +148,8 @@ public class RecordFragment extends Fragment {
                 builder.setPositiveButton(getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                uploadFileName=(input.getText().toString()).concat(".mp3");
-                                RECORDED_FILE=RECORDED_FILE.concat(uploadFileName);
+                                uploadFileName = (input.getText().toString()).concat(".mp3");
+                                RECORDED_FILE = RECORDED_FILE.concat(uploadFileName);
 
                                 //파일경로 표시 (/storage/emulated/0/mobilrecord/)
                                 messageText.setText("Uploading file path :\n" + RECORDED_FILE);
@@ -166,9 +186,14 @@ public class RecordFragment extends Fragment {
         });
 
         recordStopBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+
+                recordStopBtn.setEnabled(false);
+                recordBtn.setEnabled(true);
+
+                current_record_textView.setText("-------------- 녹음 정지 --------------");
+
                 if (recorder == null)
                     return;
 
@@ -176,14 +201,18 @@ public class RecordFragment extends Fragment {
                 recorder.release();
                 recorder = null;
 
+                uploadEvent();
+
                 Toast.makeText(getActivity(),
                         "녹음이 중지되었습니다.", Toast.LENGTH_SHORT).show();
-                // TODO Auto-generated method stub
+
+                refresh();
 
             }
         });
 
 
+/*
         playBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             public void onClick(View view) {
@@ -207,14 +236,15 @@ public class RecordFragment extends Fragment {
                 }
             }
         });
+*/
 
-        /*
-        리스트뷰 설정
-        */
+        /**
+         리스트뷰 설정
+         */
         this.InitializesettingData();
 
         ListView listView = (ListView) root.findViewById(R.id.listView_record);
-        final ListAdapter myAdapter = new ListAdapter(getActivity(), recordDataList);
+        myAdapter = new ListAdapter(getActivity(), recordDataList);
 
         listView.setAdapter(myAdapter);
 
@@ -222,27 +252,36 @@ public class RecordFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
+                String recordName = "default";
+                recordName = myAdapter.getItem(position).getRecordName();
                 //터치한 목록 이름 토스트 ㅎ
-                Toast.makeText(getActivity(), myAdapter.getItem(position).getRecordName(), Toast.LENGTH_SHORT).show();
-
-                //리스트뷰 목록에 따라 조건문 실행
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    default:
-                }
+                Toast.makeText(getActivity(), recordName, Toast.LENGTH_SHORT).show();
+                postInfo(recordName);
             }
         });
-
         return root;
     }
 
-    public int uploadFile(String sourceFileUri) {
+    public void refresh() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+    }
 
+    private void postInfo(String value) {
+        try {
+            Connection.Response res = Jsoup.connect(upLoadServerUriPost)
+                    .data("data", value)
+                    .timeout(5000)
+                    .maxBodySize(0)
+                    .method(Connection.Method.POST)
+                    .execute();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int uploadFile(String sourceFileUri) {
 
         String fileName = sourceFileUri;
 
@@ -413,7 +452,6 @@ public class RecordFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-
     }
 
     public void onPause() {
@@ -435,15 +473,30 @@ public class RecordFragment extends Fragment {
         recordDataList = new ArrayList<item_list>();
 
         String rootSD = Environment.getExternalStorageDirectory().toString();
-        file = new File( rootSD + "/mobilrecord" ) ;
+        file = new File(rootSD + "/mobilrecord");
         File list[] = file.listFiles();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Log.d("TAG", "파일 수정일시 : " + simpleDateFormat.format(file.lastModified()));
 
-        for( int i=0; i<list.length; i++)
-        {
-            recordDataList.add(new item_list(list[i].getName(),simpleDateFormat.format(list[i].lastModified())));
+        for (int i = 0; i < list.length; i++) {
+            recordDataList.add(new item_list(list[i].getName(), simpleDateFormat.format(list[i].lastModified())));
         }
+    }
+    public void uploadEvent(){
+        dialog = ProgressDialog.show(getActivity(), "", "Uploading file...", true);
+
+        new Thread(new Runnable() {
+            public void run() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                    public void run() {
+                        messageText.setText("uploading started.....");
+                    }
+                });
+
+                uploadFile(uploadFilePath + "" + uploadFileName);
+
+            }
+        }).start();
     }
 }

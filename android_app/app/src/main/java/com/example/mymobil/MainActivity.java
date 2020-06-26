@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
 
+import com.example.mymobil.record.ListAdapter;
 import com.example.mymobil.setting.SettingActivity;
 import com.example.mymobil.sos.SosActivity;
 
@@ -114,6 +115,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
 
 }
