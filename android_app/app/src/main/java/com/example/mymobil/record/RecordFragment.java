@@ -44,7 +44,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Create by Jinyeob on 2020. 06. 24.
  */
 
-public class UploadActivity extends Fragment {
+public class RecordFragment extends Fragment {
 
     final String uploadFilePath = "/storage/emulated/0/mobilrecord/";
     String uploadFileName = "recorded.mp3";

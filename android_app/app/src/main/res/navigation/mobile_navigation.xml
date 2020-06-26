@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/nav_record"
-        android:name="com.example.mymobil.record.UploadActivity"
+        android:name="com.example.mymobil.record.RecordFragment"
         android:label="@string/menu_record"
         tools:layout="@layout/activity_upload" />
 </navigation>
