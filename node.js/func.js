@@ -137,28 +137,26 @@ exports.onSpeaker = function main2 (argument1,audio){
 
 
 exports.onMotor = function main3 (argument1, audio){
-  if( argument1 === 'motor off'){ //모터 OFF
+  if( argument1 === 'motoroff'){ //모터 OFF
     motor_onoff.pwmWrite(0);
     motor_right.pwmWrite(0);
     motor_left.pwmWrite(0);
     if(audio != null)
       audio.kill()
   }
-  else if( argument1 === 'motor right'){
+  else if( argument1 === 'right'){
     motor_onoff.pwmWrite(255);
     motor_right.pwmWrite(255);
     motor_left.pwmWrite(0);
 
-    if(audio != null){
-      audio.kill()
-    }
+   
     audio = player.play('./sound_file/i.mp3', function(err){
       if (err) throw err
     })
     return audio
     
   }
-  else if( argument1 === 'motor left'){
+  else if( argument1 === 'left'){
     motor_onoff.pwmWrite(255);
     motor_right.pwmWrite(0);
     motor_left.pwmWrite(255);

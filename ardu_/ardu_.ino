@@ -104,7 +104,7 @@ void loop() {
  //RGB LED 5V에 꽂아라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  // setColor(255, 0, 0); // red
 
-  allString=CheckDust()
+  allString=CheckDust();
   allString+=CheckTempHumidity()+CheckBodyTemp();
   
   Serial.print(allString);
