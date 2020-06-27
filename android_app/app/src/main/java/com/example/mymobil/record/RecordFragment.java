@@ -201,8 +201,6 @@ public class RecordFragment extends Fragment {
                 recorder.release();
                 recorder = null;
 
-                uploadEvent();
-
                 Toast.makeText(getActivity(),
                         "녹음이 중지되었습니다.", Toast.LENGTH_SHORT).show();
 
@@ -256,7 +254,8 @@ public class RecordFragment extends Fragment {
                 recordName = myAdapter.getItem(position).getRecordName();
                 //터치한 목록 이름 토스트 ㅎ
                 Toast.makeText(getActivity(), recordName, Toast.LENGTH_SHORT).show();
-                postInfo(recordName);
+
+                uploadEvent(recordName);
             }
         });
         return root;
@@ -483,7 +482,7 @@ public class RecordFragment extends Fragment {
             recordDataList.add(new item_list(list[i].getName(), simpleDateFormat.format(list[i].lastModified())));
         }
     }
-    public void uploadEvent(){
+    public void uploadEvent(String recordFileName){
         dialog = ProgressDialog.show(getActivity(), "", "Uploading file...", true);
 
         new Thread(new Runnable() {
@@ -494,7 +493,7 @@ public class RecordFragment extends Fragment {
                     }
                 });
 
-                uploadFile(uploadFilePath + "" + uploadFileName);
+                uploadFile(uploadFilePath + "" + recordFileName);
 
             }
         }).start();
