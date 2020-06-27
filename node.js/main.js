@@ -1,6 +1,8 @@
 var express = require('express') 
-var fs = require('fs')   
 var multer = require('multer')
+const fs = require('fs');
+const path = '~/Smart-Mobil/node.js/uploads';
+
 var app = express();
 var done = false;
 
@@ -14,8 +16,10 @@ var bodyParser = require('body-parser');
 // add record func 1. 
 app.use(multer({
   dest: './uploads/',
+
+  
   rename: function (fieldname, filename) {
-      return Date.now();
+      return 1;
   },
   onFileUploadStart: function (file) {
       console.log(file.originalname + ' is starting ...')
@@ -24,7 +28,7 @@ app.use(multer({
       console.log(file.fieldname + ' uploaded to  ' + file.path)
       done = true;
   }
-}).any());
+}));
 
 
 app.use(bodyParser.json()); 
@@ -134,14 +138,18 @@ app.get('/record', function (req, res) {
 
 
 app.post('/api/photo', function (req, res) {
+ 
   if (done == true) {
       console.log(req.files);
       res.end("File uploaded.\n" + JSON.stringify(req.files));
   }
+
+ 
 });
 
 var audio 
 var audio2
+var audio3
 var recvData 
 app.post("/data", function(req, res){
   recvData = req.body.data 
@@ -149,6 +157,7 @@ app.post("/data", function(req, res){
   funcjs.onLed(recvData);
   audio = funcjs.onSpeaker(recvData,audio);
   funcjs.onMotor(recvData,audio2);
+  audio3 = funcjs.onVoice(recvData,audio3);
 
   res.render('finish', { title: './view_file/finish'});
 });

@@ -171,3 +171,25 @@ exports.onMotor = function main3 (argument1, audio){
   }
 
 }
+
+
+
+
+
+
+
+exports.onVoice = function main4 (argument1,audio){
+
+  if( argument1 === 'vociestop'){ //스피커 OFF
+
+    audio.kill()
+  }
+  else if( argument1 === 'voice'){
+    audio = player.play('./uploads/1.mp3', function(err){
+      if (err) throw err
+    })
+    return audio
+  }
+
+  
+}
