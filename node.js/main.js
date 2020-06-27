@@ -24,7 +24,7 @@ app.use(multer({
       console.log(file.fieldname + ' uploaded to  ' + file.path)
       done = true;
   }
-}));
+}).any());
 
 
 app.use(bodyParser.json()); 
