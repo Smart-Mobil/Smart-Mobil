@@ -1,7 +1,5 @@
 # SmartMobil
 한국산업기술대학교 컴퓨터공학과 졸업작품<br>
-Korea Polytechnic University<br>
-Computer Engineering Senier Project<br>
 (Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
 
 https://youtu.be/NGTB0ODe2eY
@@ -57,7 +55,7 @@ https://youtu.be/NGTB0ODe2eY
 ----------------------------------------------------------
 #### Application
 * App 프로토타입
-<img src="https://user-images.githubusercontent.com/37360089/80593558-68e9d280-8a5c-11ea-86b9-7a3859a4b599.png"/>
+<img src="https://github.com/Smart-Mobil/Smart-Mobil/blob/master/android_app/doucments/%EC%95%B1%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85.jpeg"/>
 
 #### Arduino, RasberryPi
 * 회로도
