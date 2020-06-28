@@ -19,6 +19,7 @@ const motor_right = new Gpio(26, {mode: Gpio.OUTPUT});
 
 // 스피커기능
 var player = require('play-sound')(opts = {})
+var sound = require('node-aplay')
 
 // 주요 기능들에 따른 함수를 호출할 예정입니다. 
 exports.onLed = function main( argument1 ) {
@@ -123,7 +124,7 @@ exports.onSpeaker = function main2 (argument1,audio){
   }
 
   else if( argument1 === 'start10'){
-    audio = player.play('./sound_file/j.mp3', function(err){
+    audio = player.play('./uploads/1.mp3', function(err){
       if (err) throw err
     })
     return audio
@@ -177,18 +178,21 @@ exports.onMotor = function main3 (argument1, audio){
 
 
 
-
+var voice 
 exports.onVoice = function main4 (argument1,audio){
 
-  if( argument1 === 'vociestop'){ //스피커 OFF
-
-    audio.kill()
+  if( argument1 === 'voicestop'){ 
+    
+    
+    setTimeout(function () {
+      voice = audio
+      voice.pause(); // pause the music after five seconds
+    }, 100);
   }
   else if( argument1 === 'voice'){
-    audio = player.play('./uploads/1.mp3', function(err){
-      if (err) throw err
-    })
-    return audio
+    voice = new sound('./uploads/1.wav')
+    voice.play()
+    return voice
   }
 
   
