@@ -1,42 +1,12 @@
-// code from https://github.com/codeforgeek/File-upload-in-Node/
-// Tutorial link : http://wp.me/p4ISPV-cq
-var express = require('express');
-var multer = require('multer');
-var app = express();
-var done = false;
+var Gpio = require('pigpio').Gpio, //include pigpio to interact with the GPIO
+ledRed = new Gpio(16, {mode: Gpio.OUTPUT}), //use GPIO pin 4 as output for RED
+ledGreen = new Gpio(20, {mode: Gpio.OUTPUT}), //use GPIO pin 17 as output for GREEN
+ledBlue = new Gpio(21, {mode: Gpio.OUTPUT}), //use GPIO pin 27 as output for BLUE
+redRGB = 255, //set starting value of RED variable to off (255 for common anode)
+greenRGB = 255, //set starting value of GREEN variable to off (255 for common anode)
+blueRGB = 255; //set starting value of BLUE variable to off (255 for common anode)
 
-app.use(multer({
-    dest: './uploads/',
-    rename: function (fieldname, filename) {
-        return Date.now();
-    },
-    onFileUploadStart: function (file) {
-        console.log(file.originalname + ' is starting ...')
-    },
-    onFileUploadComplete: function (file) {
-        console.log(file.fieldname + ' uploaded to  ' + file.path)
-        done = true;
-    }
-}));
-
-app.get('/', function (req, res) {
-    res.sendfile('index.html');
-});
-
-app.post('/api/photo', function (req, res) {
-    if (done == true) {
-        console.log(req.files);
-        res.end("File uploaded.\n" + JSON.stringify(req.files));
-    }
-});
-
-app.post('/api/excel', function (req, res) {
-    if (done == true) {
-        console.log(req.files);
-        res.end("Excel File uploaded.\n" + JSON.stringify(req.files));
-    }
-});
-
-app.listen(3000, function () {
-    console.log("Working on port 3000");
-});
+//RESET RGB LED
+ledRed.digitalWrite(1); // Turn RED LED off
+ledGreen.digitalWrite(1); // Turn GREEN LED off
+ledBlue.digitalWrite(1); // Turn BLUE LED off
