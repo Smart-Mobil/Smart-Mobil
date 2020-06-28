@@ -3,13 +3,17 @@ package com.example.mymobil.record;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioFormat;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,16 +50,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import omrecorder.AudioChunk;
+import omrecorder.AudioRecordConfig;
+import omrecorder.OmRecorder;
+import omrecorder.PullTransport;
+import omrecorder.PullableSource;
+import omrecorder.Recorder;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Create by Jinyeob on 2020. 06. 24.
+ * Update by Jinyeob on 2020. 06. 28.
  */
 
 public class RecordFragment extends Fragment {
 
     final String uploadFilePath = "/storage/emulated/0/mobilrecord/";
-    String uploadFileName = "recorded.mp3";
+    String uploadFileName = "recorded.wav";
     TextView messageText;
     Button uploadButton;
     int serverResponseCode = 0;
@@ -63,9 +75,7 @@ public class RecordFragment extends Fragment {
     String upLoadServerUri = "http://172.20.10.11:3000/api/photo";
     String upLoadServerUriPost = "http://172.20.10.11";
 
-
-    MediaPlayer player;
-    MediaRecorder recorder;
+    Recorder recorder;
 
     int playbackPosition = 0;
     @SuppressLint("SdCardPath")
@@ -75,6 +85,9 @@ public class RecordFragment extends Fragment {
     private File file;
 
     ListAdapter myAdapter;
+    Button recordBtn;
+    Button recordStopBtn;
+    Button voiceStopBtn;
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -109,26 +122,14 @@ public class RecordFragment extends Fragment {
             getActivity().finish();
         }
 
-        /*
-        //업로드 버튼 클릭이벤트
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                uploadEvent();
-            }
-        });
-
-         */
-
         //재생
-        Button recordBtn = (Button) root.findViewById(R.id.recordBtn);
-        Button recordStopBtn = (Button) root.findViewById(R.id.recordStopBtn);
-        //Button playBtn = (Button) root.findViewById(R.id.playBtn);
-        //Button playStopBtn = (Button) root.findViewById(R.id.playStopBtn);
+        recordBtn = (Button) root.findViewById(R.id.recordBtn);
+        recordStopBtn = (Button) root.findViewById(R.id.recordStopBtn);
+        voiceStopBtn = (Button) root.findViewById(R.id.voicestop);
 
         recordBtn.setEnabled(true);
         recordStopBtn.setEnabled(false);
+        voiceStopBtn.setEnabled(false);
 
         recordBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -137,10 +138,8 @@ public class RecordFragment extends Fragment {
                 recordBtn.setEnabled(false);
                 recordStopBtn.setEnabled(true);
 
-                current_record_textView.setText("-------------- 녹음 중 ------------");
                 //파일 이름 입력하는 다이얼로그
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
                 EditText input = new EditText(getActivity());
 
                 builder.setTitle("녹음 제목");
@@ -148,27 +147,27 @@ public class RecordFragment extends Fragment {
                 builder.setPositiveButton(getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                uploadFileName = (input.getText().toString()).concat(".mp3");
+                                uploadFileName = (input.getText().toString()).concat(".wav");
+                                Log.e("filename", "filename: " + uploadFileName);
+
+                                RECORDED_FILE = "/sdcard/mobilrecord/";
                                 RECORDED_FILE = RECORDED_FILE.concat(uploadFileName);
+                                Log.e("RECORDED_FILE", "RECORDED_FILE: " + RECORDED_FILE);
 
                                 //파일경로 표시 (/storage/emulated/0/mobilrecord/)
                                 messageText.setText("Uploading file path :\n" + RECORDED_FILE);
 
-                                if (recorder != null) {
-                                    recorder.stop();
-                                    recorder.release();
-                                    recorder = null;
-                                }// TODO Auto-generated method stub
-                                recorder = new MediaRecorder();
-                                recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                                recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-                                recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-                                recorder.setOutputFile(RECORDED_FILE);
+                                setupRecorder();
+
+                                assert recorder != null;
+                                recorder.startRecording();
+
                                 try {
                                     Toast.makeText(getActivity(),
                                             "녹음을 시작합니다.", Toast.LENGTH_SHORT).show();
-                                    recorder.prepare();
-                                    recorder.start();
+
+                                    current_record_textView.setText("-------------- 녹음 중 ------------");
+                                    messageText.setText("");
                                 } catch (Exception ex) {
                                     Log.e("SampleAudioRecorder", "Exception : ", ex);
                                 }
@@ -193,13 +192,16 @@ public class RecordFragment extends Fragment {
                 recordBtn.setEnabled(true);
 
                 current_record_textView.setText("-------------- 녹음 정지 --------------");
+                messageText.setText("");
 
                 if (recorder == null)
                     return;
 
-                recorder.stop();
-                recorder.release();
-                recorder = null;
+                try {
+                    recorder.stopRecording();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 Toast.makeText(getActivity(),
                         "녹음이 중지되었습니다.", Toast.LENGTH_SHORT).show();
@@ -209,32 +211,16 @@ public class RecordFragment extends Fragment {
             }
         });
 
-
-/*
-        playBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
+        voiceStopBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                try {
-                    playAudio(RECORDED_FILE);
-
-                    Toast.makeText(getActivity(), "음악파일 재생 시작됨.", 2000).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                voiceStopBtn.setEnabled(false);
+                new Thread() {
+                    public void run() {
+                        postInfo("voicestop");
+                    }
+                }.start();
             }
         });
-
-        playStopBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            public void onClick(View view) {
-                if (player != null) {
-                    playbackPosition = player.getCurrentPosition();
-                    player.pause();
-                    Toast.makeText(getActivity(), "음악 파일 재생 중지됨.", 2000).show();
-                }
-            }
-        });
-*/
 
         /**
          리스트뷰 설정
@@ -250,12 +236,24 @@ public class RecordFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
+                voiceStopBtn.setEnabled(true);
                 String recordName = "default";
                 recordName = myAdapter.getItem(position).getRecordName();
                 //터치한 목록 이름 토스트 ㅎ
                 Toast.makeText(getActivity(), recordName, Toast.LENGTH_SHORT).show();
 
                 uploadEvent(recordName);
+                try {
+                    Thread.sleep(1000) ;
+                } catch (Exception e) {
+                    e.printStackTrace() ;
+                }
+                new Thread() {
+                    public void run() {
+                        postInfo("voice");
+                    }
+                }.start();
+
             }
         });
         return root;
@@ -278,6 +276,33 @@ public class RecordFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupRecorder() {
+        recorder = OmRecorder.wav(
+                new PullTransport.Default(mic(), new PullTransport.OnAudioChunkPulledListener() {
+                    @Override public void onAudioChunkPulled(AudioChunk audioChunk) {
+                        //animateVoice((float) (audioChunk.maxAmplitude() / 200.0));
+                    }
+                }), file());
+    }
+
+    private void animateVoice(final float maxPeak) {
+        recordBtn.animate().scaleX(1 + maxPeak).scaleY(1 + maxPeak).setDuration(10).start();
+    }
+
+    private PullableSource mic() {
+        return new PullableSource.Default(
+                new AudioRecordConfig.Default(
+                        MediaRecorder.AudioSource.MIC, AudioFormat.ENCODING_PCM_16BIT,
+                        AudioFormat.CHANNEL_IN_MONO, 44100
+                )
+        );
+    }
+
+    @NonNull
+    private File file() {
+        return new File(uploadFilePath, uploadFileName);
     }
 
     public int uploadFile(String sourceFileUri) {
@@ -378,12 +403,11 @@ public class RecordFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
 
-                            String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
-                                    + response.toString();
+                            String msg = "File Upload Completed."/*\n\n See uploaded file here : \n\n"
+                                    + response.toString()*/;
 
                             messageText.setText(msg);
-                            Toast.makeText(getActivity(), "File Upload Complete.",
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "File Upload Complete.",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -416,9 +440,8 @@ public class RecordFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     public void run() {
-                        messageText.setText("Got Exception : see logcat ");
-                        Toast.makeText(getActivity(), "Got Exception : see logcat ",
-                                Toast.LENGTH_SHORT).show();
+                        messageText.setText("Got Exception");
+                        //Toast.makeText(getActivity(), "Got Exception",Toast.LENGTH_SHORT).show();
                     }
                 });
                 Log.e("Upload file Exception", "Exception : " + e.getMessage(), e);
@@ -427,44 +450,6 @@ public class RecordFragment extends Fragment {
             return serverResponseCode;
 
         } // End else block
-    }
-
-    private void playAudio(String url) throws Exception {
-        killMediaPlayer();
-
-        player = new MediaPlayer();
-        player.setDataSource(url);
-        player.prepare();
-        player.start();
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        killMediaPlayer();
-    }
-
-    private void killMediaPlayer() {
-        if (player != null) {
-            try {
-                player.release();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void onPause() {
-        if (recorder != null) {
-            recorder.release();
-            recorder = null;
-        }
-        if (player != null) {
-            player.release();
-            player = null;
-        }
-
-        super.onPause();
-
     }
 
     /* 리스트뷰 목록 추가시 여기에 */
@@ -482,7 +467,8 @@ public class RecordFragment extends Fragment {
             recordDataList.add(new item_list(list[i].getName(), simpleDateFormat.format(list[i].lastModified())));
         }
     }
-    public void uploadEvent(String recordFileName){
+
+    public void uploadEvent(String recordFileName) {
         dialog = ProgressDialog.show(getActivity(), "", "Uploading file...", true);
 
         new Thread(new Runnable() {
