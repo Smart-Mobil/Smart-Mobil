@@ -37,7 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class Tab1Fragment extends Fragment {
     private String moodlightUrl = "";
-    private int color;
+    private int color[];
     TextView textView;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -108,14 +108,18 @@ public class Tab1Fragment extends Fragment {
             colorPickerView.setColorListener(new ColorEnvelopeListener() {
                 @Override
                 public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                    color = envelope.getColor();
-                    textView.setText(String.valueOf(color));
+                    color = envelope.getArgb();
+                    int r=color[1];
+                    int g=color[2];
+                    int b=color[3];
+                    String rgb="on"+String.valueOf(r)+"a"+String.valueOf(g)+"a"+String.valueOf(b);
+                    textView.setText(rgb);
                     btnOff.setEnabled(true);
 
                     //컬러 보내기
                     new Thread() {
                         public void run() {
-                            postInfo(String.valueOf(color));
+                            postInfo(String.valueOf(rgb));
                         }
                     }.start();
                 }
