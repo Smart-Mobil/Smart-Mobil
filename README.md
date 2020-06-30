@@ -45,7 +45,7 @@ https://youtu.be/NGTB0ODe2eY
 * SoC Board : Arduino Uno / Raspberry Pi 4 B+  
 * Device : Galaxy S10, LG q9
 * Module : DHT22 / SG90 / PM2008M / MLX90614  
-* OS : Raspbian  
+* OS : Raspbian,   
 * DB : MySQL  
 * Main Server : nodeJS  
 * Streaming Server : UV4L  
