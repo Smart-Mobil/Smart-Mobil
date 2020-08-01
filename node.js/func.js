@@ -7,9 +7,9 @@ redRGB = 255, //set starting value of RED variable to off (255 for common anode)
 greenRGB = 255, //set starting value of GREEN variable to off (255 for common anode)
 blueRGB = 255; //set starting value of BLUE variable to off (255 for common anode)
 //RESET RGB LED
-ledRed.pwmWrite(redRGB); // Turn RED LED off
-ledGreen.pwmWrite(greenRGB); // Turn GREEN LED off
-ledBlue.pwmWrite(blueRGB); // Turn BLUE LED off
+ledRed.pwmWrite(0); //set RED LED to specified value
+ledGreen.pwmWrite(0); //set GREEN LED to specified value
+ledBlue.pwmWrite(0); //set BLUE LED to specified value
 
 // 
 const motor_onoff = new Gpio(13, {mode: Gpio.OUTPUT});
@@ -26,26 +26,42 @@ exports.onLed = function main( argument1 ) {
 
   // led
     // Do Something
-    if( argument1 === 'on'){ //스피커 ON
+    if( argument1[0] === 'o' &&  argument1[1] === 'n'){ //스피커 ON
       /* a~g까지 알파벳들을 입력받아서  */
-      console.log("mainfunc");
-  
-      
-      ledRed.pwmWrite(0); //set RED LED to specified value
-      ledGreen.pwmWrite(0); //set GREEN LED to specified value
-      ledBlue.pwmWrite(0); //set BLUE LED to specified value
+      console.log("led on");
+      red =''
+      green =''
+      blue =''
+      var cnt = 2
+      for(var i = cnt; argument1[i] != 'a' && i < argument1.length ; i++,cnt++){
+          red += argument1[i] 
+      }
+      cnt= cnt + 1
+      for(var i = cnt; argument1[i] != 'a' && i < argument1.length; i++,cnt++){
+        green += argument1[i] 
+      }
+      cnt = cnt + 1
+      for(var i = cnt; argument1[i] != 'a' && i < argument1.length; i++,cnt++){
+        blue += argument1[i] 
+      }
+      redRGB = parseInt( red)
+      greenRGB = parseInt( green)
+      blueRGB =  parseInt( blue)
+
+      ledRed.pwmWrite(redRGB); //set RED LED to specified value
+      ledGreen.pwmWrite(greenRGB); //set GREEN LED to specified value
+      ledBlue.pwmWrite(blueRGB); //set BLUE LED to specified value
   
       return 1;
   
     }
     if( argument1 === 'off'){ //스피커 ON
       /* a~g까지 알파벳들을 입력받아서  */
-      console.log("mainfunc");
+      console.log("led off");
   
-      
-      ledRed.pwmWrite(255); // Turn RED LED off
-      ledGreen.pwmWrite(255); // Turn GREEN LED off
-      ledBlue.pwmWrite(255); // Turn BLUE LED off
+      ledRed.pwmWrite(0); //set RED LED to specified value
+      ledGreen.pwmWrite(0); //set GREEN LED to specified value
+      ledBlue.pwmWrite(0); //set BLUE LED to specified value
   
       return 1;
   
@@ -61,7 +77,7 @@ exports.onSpeaker = function main2 (argument1,audio){
     audio.kill()
   }
   else if( argument1 === 'start1'){
-    audio = player.play('./sound_file/a.mp3', function(err){
+    audio = player.play('./sound_file/c.mp3', function(err){
       if (err) throw err
     })
     return audio

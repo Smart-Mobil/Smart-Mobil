@@ -7,6 +7,6 @@ greenRGB = 255, //set starting value of GREEN variable to off (255 for common an
 blueRGB = 255; //set starting value of BLUE variable to off (255 for common anode)
 
 //RESET RGB LED
-ledRed.digitalWrite(1); // Turn RED LED off
-ledGreen.digitalWrite(1); // Turn GREEN LED off
-ledBlue.digitalWrite(1); // Turn BLUE LED off
+ledRed.pwmWrite(0); // Turn RED LED off
+ledGreen.pwmWrite(0); // Turn GREEN LED off
+ledBlue.pwmWrite(0); // Turn BLUE LED off

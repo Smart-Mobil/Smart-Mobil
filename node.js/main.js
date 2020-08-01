@@ -156,7 +156,7 @@ app.post("/data", function(req, res){
   console.log(recvData);
   funcjs.onLed(recvData);
   audio = funcjs.onSpeaker(recvData,audio);
-  funcjs.onMotor(recvData,audio2);
+  audio2 = funcjs.onMotor(recvData,audio2);
   audio3 = funcjs.onVoice(recvData,audio3);
 
   res.render('finish', { title: './view_file/finish'});
@@ -192,6 +192,13 @@ app.get("/hello", (req, res) => {
     var d = new Date();
     res.render('hello', { title: './view_file/Hello',message1: h1, message2: h2, message3 : h3, message4: d  })
 })
+})
+
+
+
+
+app.get("/admin", (req, res) => { 
+  res.sendfile('./view_file/admin.html');
 })
 
 
