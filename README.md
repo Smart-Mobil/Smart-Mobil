@@ -2,7 +2,7 @@
 한국산업기술대학교 컴퓨터공학과 졸업작품<br>
 (Professor) 공기석, (Student) 김진엽, 박현욱, 신용원  
 
-https://youtu.be/NGTB0ODe2eY
+https://youtu.be/pDXPU1I7WkY
 --------------------------------------
 
 ### :bulb: 프로젝트명 
