@@ -1,0 +1,37 @@
+심사위원 1. 
+- 그림 제목 수정
+: 수정 완료하였습니다.
+
+
+심사위원 2. 
+
+- 국문 초록 첫 문장 수정
+: 본 논문에서는 아두이노, 라즈베리 파이를 통해 유아 주변의 온도, 습도, 미세 먼지 데이터를 사용자에게 제공하고, 애플리케이션을 통해 모빌의 동작을 원격으로 제어하는 ​​시스템을 다루었다. 
+→ 본 논문은 아두이노, 라즈베리파이를 통해 모빌의 동작을 원격으로 제어하는 시스템을 다루었다. 유아 주변의 온도, 습도, 미세 먼지 데이터를 사용자에게 제공하고, 애플리케이션을 통해 모빌의 동작을 원격으로 제어한다. 
+국문 요약의 첫 문장을 수정하였습니다.
+
+- 관련 연구 비교 / 연구논문 형식으로 수정
+:  환경 데이터 측정 센서들과 관련하여, 관련 연구 논문들을 추가, 인용하였습니다. 
+논문 3장의 1절 Development Environment 부분의 3번째 문단부터
+온습도 측정 센서와 미세먼지 측정 센서에 타 논문 연구 비교 부분을 추가적으로 작성하였습니다.
+
+
+심사위원 3.
+- 논문 제목 수정
+Remote Control Smart Mobile System For Infants
+:  Remotely Controllable Smart Mobile System Using Arduino and Raspberry Pi for Infants
+
+- 논문 예약부분에서 기존 상품에 대한 내용 추가, 보강
+: 
+부모에게 유아 주변의 환경정보를 제공하고, 원격 제어 기능과 애플리케이션의 여러 편리 기능을 제공함으로써 육아 편의성을 향상할 것으로 기대한다.
+->
+기존 시중의 제품은 신생아 주변의 환경 정보를 제공하지 않고, 애플리케이션을 통한 여러 기능을 제공하지 않는다. 반면에 본 논문에서 다루는 시스템은 부모에게 유아 주변의 환경정보를 제공하고, 원격 제어 기능과 애플리케이션의 여러 편리 기능을 제공함으로써 기존 제품 대비 육아의 편의성을 향상할 것으로 기대한다.
+It is expected to improve child-rearing convenience by providing data to provide a comfortable environment for Parents and remotely controlling the mobile through an application.
+->
+On the other hand, the system covered in ths paper is expected to improve child-rearing convenience by providing parents environmental information around infants, remotely controllabe function and convenient functions of the application
+
+- 실험 및 결과 부분 보강
+표 5는 장소별로 모빌과 애플리케이션의 데이터 전송시간을 측정한 것이다. 각 명령이 1초 이내 외로 전달되는 것을 확인하였다.
+->
+표 5는 애플리케이션에서 모빌로의 데이터 전송시간을 장소별로 3가지 기능을 각각 10회씩 측정하여 도출한 평균 데이터이다. 측정 결과, 집, 카페, 학교 순서로 최대 0.5초의 전송시간의 차이가 존재하였다. 이는 사용자가 불편함을 느끼지 않는 범위 내에서 시스템이 정상 동작하는 것으로 판단된다.
+
