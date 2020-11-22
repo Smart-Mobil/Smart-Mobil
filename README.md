@@ -57,7 +57,7 @@ https://youtu.be/pDXPU1I7WkY
 ----------------------------------------------------------
 #### Application
 * App 프로토타입
-<img src="https://github.com/Smart-Mobil/Smart-Mobil/blob/master/android_app/doucments/앱프로토타입.png"/>
+<img src="https://github.com/Smart-Mobil/Smart-Mobil/blob/master/Documents/애플리케이션%20문서/앱프로토타입.png"/>
 
 #### Arduino, RasberryPi
 * 회로도
